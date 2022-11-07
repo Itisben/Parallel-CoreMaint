@@ -1,0 +1,283 @@
+Flat profile:
+
+Each sample counts as 0.01 seconds.
+  %   cumulative   self              self     total           
+ time   seconds   seconds    calls   s/call   s/call  name    
+ 25.95      5.91     5.91                             gadget::CSRReadEdges(char*, int*, int*, bool)
+ 24.02     11.38     5.47 13820853     0.00     0.00  std::_Rb_tree<std::pair<int, int>, std::pair<int, int>, std::_Identity<std::pair<int, int> >, std::less<std::pair<int, int> >, std::allocator<std::pair<int, int> > >::_M_get_insert_unique_pos(std::pair<int, int> const&)
+ 15.89     15.00     3.62                             core::GLIST::Check(std::vector<std::vector<int, std::allocator<int> >, std::allocator<std::vector<int, std::allocator<int> > > > const&, std::vector<int, std::allocator<int> > const&) const
+ 11.59     17.64     2.64                             core::GLIST::ComputeCore(std::vector<std::vector<int, std::allocator<int> >, std::allocator<std::vector<int, std::allocator<int> > > >&, bool, std::vector<int, std::allocator<int> >&)
+  8.87     19.66     2.02 11111391     0.00     0.00  gadget::Treap::Rank(int) const
+  4.43     20.67     1.01        1     1.01     1.01  std::_Rb_tree<std::pair<int, int>, std::pair<int, int>, std::_Identity<std::pair<int, int> >, std::less<std::pair<int, int> >, std::allocator<std::pair<int, int> > >::_M_erase(std::_Rb_tree_node<std::pair<int, int> >*)
+  2.81     21.31     0.64                             core::GLIST::Remove(int, int, std::vector<std::vector<int, std::allocator<int> >, std::allocator<std::vector<int, std::allocator<int> > > >&, std::vector<int, std::allocator<int> >&)
+  2.20     21.81     0.50                             void std::__adjust_heap<__gnu_cxx::__normal_iterator<DATA*, std::vector<DATA, std::allocator<DATA> > >, long, DATA, __gnu_cxx::__ops::_Iter_comp_iter<CompareOrder> >(__gnu_cxx::__normal_iterator<DATA*, std::vector<DATA, std::allocator<DATA> > >, long, long, DATA, __gnu_cxx::__ops::_Iter_comp_iter<CompareOrder>)
+  1.89     22.24     0.43  4068040     0.00     0.00  gadget::Treap::Insert(int, bool, int&)
+  0.44     22.34     0.10   251530     0.00     0.00  void std::vector<int, std::allocator<int> >::_M_realloc_insert<int const&>(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >, int const&)
+  0.40     22.43     0.09   101115     0.00     0.00  gadget::Treap::Delete(int, int&)
+  0.26     22.49     0.06                             std::__detail::_Map_base<int, std::pair<int const, std::vector<edge_dest_t, std::allocator<edge_dest_t> > >, std::allocator<std::pair<int const, std::vector<edge_dest_t, std::allocator<edge_dest_t> > > >, std::__detail::_Select1st, std::equal_to<int>, std::hash<int>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<false, false, true>, true>::operator[](int const&)
+  0.22     22.54     0.05    81002     0.00     0.00  core::GLIST::PropagateDismissal(std::vector<std::vector<int, std::allocator<int> >, std::allocator<std::vector<int, std::allocator<int> > > > const&, int, int, std::vector<int, std::allocator<int> >&, std::vector<int, std::allocator<int> >&, std::vector<int, std::allocator<int> >&)
+  0.22     22.59     0.05                             sort(int, int, int*, int*, int*)
+  0.13     22.62     0.03 13820853     0.00     0.00  std::pair<std::_Rb_tree_iterator<std::pair<int, int> >, bool> std::_Rb_tree<std::pair<int, int>, std::pair<int, int>, std::_Identity<std::pair<int, int> >, std::less<std::pair<int, int> >, std::allocator<std::pair<int, int> > >::_M_insert_unique<std::pair<int, int> >(std::pair<int, int>&&)
+  0.13     22.65     0.03  4170000     0.00     0.00  gadget::Treap::LeftRotate(int&)
+  0.13     22.68     0.03                             core::GLIST::GLIST(int)
+  0.13     22.71     0.03                             std::vector<int, std::allocator<int> >::vector(unsigned long, std::allocator<int> const&)
+  0.09     22.73     0.02  3966925     0.00     0.00  int std::uniform_int_distribution<int>::operator()<std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul> >(std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>&, std::uniform_int_distribution<int>::param_type const&)
+  0.09     22.75     0.02        1     0.02     0.04  gadget::Treap::Treap(int)
+  0.09     22.77     0.02                             gm_graph::load_binary_internal(_IO_FILE*, unsigned int, bool)
+  0.04     22.78     0.01   101193     0.00     0.00  gadget::Treap::RightRotate(int&)
+  0.00     22.78     0.00   200000     0.00     0.00  std::vector<int, std::allocator<int> >::_M_erase(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >)
+  0.00     22.78     0.00        1     0.00     0.00  core::GLIST::~GLIST()
+  0.00     22.78     0.00        1     0.00     0.00  gadget::MinHeap::MinHeap(int)
+  0.00     22.78     0.00        1     0.00     0.00  void std::vector<gadget::Pair, std::allocator<gadget::Pair> >::emplace_back<gadget::Pair>(gadget::Pair&&)
+  0.00     22.78     0.00        1     0.00     0.00  void std::vector<gadget::Pair, std::allocator<gadget::Pair> >::_M_realloc_insert<gadget::Pair>(__gnu_cxx::__normal_iterator<gadget::Pair*, std::vector<gadget::Pair, std::allocator<gadget::Pair> > >, gadget::Pair&&)
+
+ %         the percentage of the total running time of the
+time       program used by this function.
+
+cumulative a running sum of the number of seconds accounted
+ seconds   for by this function and those listed above it.
+
+ self      the number of seconds accounted for by this
+seconds    function alone.  This is the major sort for this
+           listing.
+
+calls      the number of times this function was invoked, if
+           this function is profiled, else blank.
+
+ self      the average number of milliseconds spent in this
+ms/call    function per call, if this function is profiled,
+	   else blank.
+
+ total     the average number of milliseconds spent in this
+ms/call    function and its descendents per call, if this
+	   function is profiled, else blank.
+
+name       the name of the function.  This is the minor sort
+           for this listing. The index shows the location of
+	   the function in the gprof listing. If the index is
+	   in parenthesis it shows where it would appear in
+	   the gprof listing if it were to be printed.
+
+Copyright (C) 2012-2020 Free Software Foundation, Inc.
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
+
+		     Call graph (explanation follows)
+
+
+granularity: each sample hit covers 2 byte(s) for 0.04% of 22.78 seconds
+
+index % time    self  children    called     name
+                                                 <spontaneous>
+[1]     54.5    5.91    6.51                 gadget::CSRReadEdges(char*, int*, int*, bool) [1]
+                0.03    5.47 13820853/13820853     std::pair<std::_Rb_tree_iterator<std::pair<int, int> >, bool> std::_Rb_tree<std::pair<int, int>, std::pair<int, int>, std::_Identity<std::pair<int, int> >, std::less<std::pair<int, int> >, std::allocator<std::pair<int, int> > >::_M_insert_unique<std::pair<int, int> >(std::pair<int, int>&&) [3]
+                1.01    0.00       1/1           std::_Rb_tree<std::pair<int, int>, std::pair<int, int>, std::_Identity<std::pair<int, int> >, std::less<std::pair<int, int> >, std::allocator<std::pair<int, int> > >::_M_erase(std::_Rb_tree_node<std::pair<int, int> >*) [7]
+-----------------------------------------------
+                                                 <spontaneous>
+[2]     24.7    3.62    2.00                 core::GLIST::Check(std::vector<std::vector<int, std::allocator<int> >, std::allocator<std::vector<int, std::allocator<int> > > > const&, std::vector<int, std::allocator<int> > const&) const [2]
+                2.00    0.00 10991829/11111391     gadget::Treap::Rank(int) const [6]
+-----------------------------------------------
+                0.03    5.47 13820853/13820853     gadget::CSRReadEdges(char*, int*, int*, bool) [1]
+[3]     24.1    0.03    5.47 13820853         std::pair<std::_Rb_tree_iterator<std::pair<int, int> >, bool> std::_Rb_tree<std::pair<int, int>, std::pair<int, int>, std::_Identity<std::pair<int, int> >, std::less<std::pair<int, int> >, std::allocator<std::pair<int, int> > >::_M_insert_unique<std::pair<int, int> >(std::pair<int, int>&&) [3]
+                5.47    0.00 13820853/13820853     std::_Rb_tree<std::pair<int, int>, std::pair<int, int>, std::_Identity<std::pair<int, int> >, std::less<std::pair<int, int> >, std::allocator<std::pair<int, int> > >::_M_get_insert_unique_pos(std::pair<int, int> const&) [4]
+-----------------------------------------------
+                5.47    0.00 13820853/13820853     std::pair<std::_Rb_tree_iterator<std::pair<int, int> >, bool> std::_Rb_tree<std::pair<int, int>, std::pair<int, int>, std::_Identity<std::pair<int, int> >, std::less<std::pair<int, int> >, std::allocator<std::pair<int, int> > >::_M_insert_unique<std::pair<int, int> >(std::pair<int, int>&&) [3]
+[4]     24.0    5.47    0.00 13820853         std::_Rb_tree<std::pair<int, int>, std::pair<int, int>, std::_Identity<std::pair<int, int> >, std::less<std::pair<int, int> >, std::allocator<std::pair<int, int> > >::_M_get_insert_unique_pos(std::pair<int, int> const&) [4]
+-----------------------------------------------
+                                                 <spontaneous>
+[5]     13.6    2.64    0.45                 core::GLIST::ComputeCore(std::vector<std::vector<int, std::allocator<int> >, std::allocator<std::vector<int, std::allocator<int> > > >&, bool, std::vector<int, std::allocator<int> >&) [5]
+                0.42    0.03 3966925/4068040     gadget::Treap::Insert(int, bool, int&) [10]
+-----------------------------------------------
+                0.02    0.00  119562/11111391     core::GLIST::Remove(int, int, std::vector<std::vector<int, std::allocator<int> >, std::allocator<std::vector<int, std::allocator<int> > > >&, std::vector<int, std::allocator<int> >&) [8]
+                2.00    0.00 10991829/11111391     core::GLIST::Check(std::vector<std::vector<int, std::allocator<int> >, std::allocator<std::vector<int, std::allocator<int> > > > const&, std::vector<int, std::allocator<int> > const&) const [2]
+[6]      8.9    2.02    0.00 11111391         gadget::Treap::Rank(int) const [6]
+-----------------------------------------------
+                             12610982             std::_Rb_tree<std::pair<int, int>, std::pair<int, int>, std::_Identity<std::pair<int, int> >, std::less<std::pair<int, int> >, std::allocator<std::pair<int, int> > >::_M_erase(std::_Rb_tree_node<std::pair<int, int> >*) [7]
+                1.01    0.00       1/1           gadget::CSRReadEdges(char*, int*, int*, bool) [1]
+[7]      4.4    1.01    0.00       1+12610982 std::_Rb_tree<std::pair<int, int>, std::pair<int, int>, std::_Identity<std::pair<int, int> >, std::less<std::pair<int, int> >, std::allocator<std::pair<int, int> > >::_M_erase(std::_Rb_tree_node<std::pair<int, int> >*) [7]
+                             12610982             std::_Rb_tree<std::pair<int, int>, std::pair<int, int>, std::_Identity<std::pair<int, int> >, std::less<std::pair<int, int> >, std::allocator<std::pair<int, int> > >::_M_erase(std::_Rb_tree_node<std::pair<int, int> >*) [7]
+-----------------------------------------------
+                                                 <spontaneous>
+[8]      4.1    0.64    0.28                 core::GLIST::Remove(int, int, std::vector<std::vector<int, std::allocator<int> >, std::allocator<std::vector<int, std::allocator<int> > > >&, std::vector<int, std::allocator<int> >&) [8]
+                0.05    0.06   81002/81002       core::GLIST::PropagateDismissal(std::vector<std::vector<int, std::allocator<int> >, std::allocator<std::vector<int, std::allocator<int> > > > const&, int, int, std::vector<int, std::allocator<int> >&, std::vector<int, std::allocator<int> >&, std::vector<int, std::allocator<int> >&) [11]
+                0.09    0.01  101115/101115      gadget::Treap::Delete(int, int&) [12]
+                0.04    0.00  113149/251530      void std::vector<int, std::allocator<int> >::_M_realloc_insert<int const&>(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >, int const&) [13]
+                0.02    0.00  119562/11111391     gadget::Treap::Rank(int) const [6]
+                0.01    0.00  101115/4068040     gadget::Treap::Insert(int, bool, int&) [10]
+                0.00    0.00  200000/200000      std::vector<int, std::allocator<int> >::_M_erase(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >) [30]
+-----------------------------------------------
+                                                 <spontaneous>
+[9]      2.2    0.50    0.00                 void std::__adjust_heap<__gnu_cxx::__normal_iterator<DATA*, std::vector<DATA, std::allocator<DATA> > >, long, DATA, __gnu_cxx::__ops::_Iter_comp_iter<CompareOrder> >(__gnu_cxx::__normal_iterator<DATA*, std::vector<DATA, std::allocator<DATA> > >, long, long, DATA, __gnu_cxx::__ops::_Iter_comp_iter<CompareOrder>) [9]
+-----------------------------------------------
+                             51416280             gadget::Treap::Insert(int, bool, int&) [10]
+                0.01    0.00  101115/4068040     core::GLIST::Remove(int, int, std::vector<std::vector<int, std::allocator<int> >, std::allocator<std::vector<int, std::allocator<int> > > >&, std::vector<int, std::allocator<int> >&) [8]
+                0.42    0.03 3966925/4068040     core::GLIST::ComputeCore(std::vector<std::vector<int, std::allocator<int> >, std::allocator<std::vector<int, std::allocator<int> > > >&, bool, std::vector<int, std::allocator<int> >&) [5]
+[10]     2.0    0.43    0.03 4068040+51416280 gadget::Treap::Insert(int, bool, int&) [10]
+                0.03    0.00 4067821/4170000     gadget::Treap::LeftRotate(int&) [18]
+                             51416280             gadget::Treap::Insert(int, bool, int&) [10]
+-----------------------------------------------
+                               20113             core::GLIST::PropagateDismissal(std::vector<std::vector<int, std::allocator<int> >, std::allocator<std::vector<int, std::allocator<int> > > > const&, int, int, std::vector<int, std::allocator<int> >&, std::vector<int, std::allocator<int> >&, std::vector<int, std::allocator<int> >&) [11]
+                0.05    0.06   81002/81002       core::GLIST::Remove(int, int, std::vector<std::vector<int, std::allocator<int> >, std::allocator<std::vector<int, std::allocator<int> > > >&, std::vector<int, std::allocator<int> >&) [8]
+[11]     0.5    0.05    0.06   81002+20113   core::GLIST::PropagateDismissal(std::vector<std::vector<int, std::allocator<int> >, std::allocator<std::vector<int, std::allocator<int> > > > const&, int, int, std::vector<int, std::allocator<int> >&, std::vector<int, std::allocator<int> >&, std::vector<int, std::allocator<int> >&) [11]
+                0.06    0.00  138381/251530      void std::vector<int, std::allocator<int> >::_M_realloc_insert<int const&>(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >, int const&) [13]
+                               20113             core::GLIST::PropagateDismissal(std::vector<std::vector<int, std::allocator<int> >, std::allocator<std::vector<int, std::allocator<int> > > > const&, int, int, std::vector<int, std::allocator<int> >&, std::vector<int, std::allocator<int> >&, std::vector<int, std::allocator<int> >&) [11]
+-----------------------------------------------
+                0.09    0.01  101115/101115      core::GLIST::Remove(int, int, std::vector<std::vector<int, std::allocator<int> >, std::allocator<std::vector<int, std::allocator<int> > > >&, std::vector<int, std::allocator<int> >&) [8]
+[12]     0.4    0.09    0.01  101115         gadget::Treap::Delete(int, int&) [12]
+                0.01    0.00  101193/101193      gadget::Treap::RightRotate(int&) [22]
+                0.00    0.00  102179/4170000     gadget::Treap::LeftRotate(int&) [18]
+-----------------------------------------------
+                0.04    0.00  113149/251530      core::GLIST::Remove(int, int, std::vector<std::vector<int, std::allocator<int> >, std::allocator<std::vector<int, std::allocator<int> > > >&, std::vector<int, std::allocator<int> >&) [8]
+                0.06    0.00  138381/251530      core::GLIST::PropagateDismissal(std::vector<std::vector<int, std::allocator<int> >, std::allocator<std::vector<int, std::allocator<int> > > > const&, int, int, std::vector<int, std::allocator<int> >&, std::vector<int, std::allocator<int> >&, std::vector<int, std::allocator<int> >&) [11]
+[13]     0.4    0.10    0.00  251530         void std::vector<int, std::allocator<int> >::_M_realloc_insert<int const&>(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >, int const&) [13]
+-----------------------------------------------
+                                                 <spontaneous>
+[14]     0.3    0.03    0.04                 core::GLIST::GLIST(int) [14]
+                0.02    0.02       1/1           gadget::Treap::Treap(int) [17]
+                0.00    0.00       1/1           gadget::MinHeap::MinHeap(int) [32]
+-----------------------------------------------
+                                                 <spontaneous>
+[15]     0.3    0.06    0.00                 std::__detail::_Map_base<int, std::pair<int const, std::vector<edge_dest_t, std::allocator<edge_dest_t> > >, std::allocator<std::pair<int const, std::vector<edge_dest_t, std::allocator<edge_dest_t> > > >, std::__detail::_Select1st, std::equal_to<int>, std::hash<int>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<false, false, true>, true>::operator[](int const&) [15]
+-----------------------------------------------
+                                                 <spontaneous>
+[16]     0.2    0.05    0.00                 sort(int, int, int*, int*, int*) [16]
+-----------------------------------------------
+                0.02    0.02       1/1           core::GLIST::GLIST(int) [14]
+[17]     0.2    0.02    0.02       1         gadget::Treap::Treap(int) [17]
+                0.02    0.00 3966925/3966925     int std::uniform_int_distribution<int>::operator()<std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul> >(std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>&, std::uniform_int_distribution<int>::param_type const&) [20]
+-----------------------------------------------
+                0.00    0.00  102179/4170000     gadget::Treap::Delete(int, int&) [12]
+                0.03    0.00 4067821/4170000     gadget::Treap::Insert(int, bool, int&) [10]
+[18]     0.1    0.03    0.00 4170000         gadget::Treap::LeftRotate(int&) [18]
+-----------------------------------------------
+                                                 <spontaneous>
+[19]     0.1    0.03    0.00                 std::vector<int, std::allocator<int> >::vector(unsigned long, std::allocator<int> const&) [19]
+-----------------------------------------------
+                0.02    0.00 3966925/3966925     gadget::Treap::Treap(int) [17]
+[20]     0.1    0.02    0.00 3966925         int std::uniform_int_distribution<int>::operator()<std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul> >(std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>&, std::uniform_int_distribution<int>::param_type const&) [20]
+-----------------------------------------------
+                                                 <spontaneous>
+[21]     0.1    0.02    0.00                 gm_graph::load_binary_internal(_IO_FILE*, unsigned int, bool) [21]
+-----------------------------------------------
+                0.01    0.00  101193/101193      gadget::Treap::Delete(int, int&) [12]
+[22]     0.0    0.01    0.00  101193         gadget::Treap::RightRotate(int&) [22]
+-----------------------------------------------
+                0.00    0.00  200000/200000      core::GLIST::Remove(int, int, std::vector<std::vector<int, std::allocator<int> >, std::allocator<std::vector<int, std::allocator<int> > > >&, std::vector<int, std::allocator<int> >&) [8]
+[30]     0.0    0.00    0.00  200000         std::vector<int, std::allocator<int> >::_M_erase(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >) [30]
+-----------------------------------------------
+                0.00    0.00       1/1           core::GLIST::~GLIST() [66]
+[31]     0.0    0.00    0.00       1         core::GLIST::~GLIST() [31]
+-----------------------------------------------
+                0.00    0.00       1/1           core::GLIST::GLIST(int) [14]
+[32]     0.0    0.00    0.00       1         gadget::MinHeap::MinHeap(int) [32]
+                0.00    0.00       1/1           void std::vector<gadget::Pair, std::allocator<gadget::Pair> >::_M_realloc_insert<gadget::Pair>(__gnu_cxx::__normal_iterator<gadget::Pair*, std::vector<gadget::Pair, std::allocator<gadget::Pair> > >, gadget::Pair&&) [34]
+                0.00    0.00       1/1           void std::vector<gadget::Pair, std::allocator<gadget::Pair> >::emplace_back<gadget::Pair>(gadget::Pair&&) [33]
+-----------------------------------------------
+                0.00    0.00       1/1           gadget::MinHeap::MinHeap(int) [32]
+[33]     0.0    0.00    0.00       1         void std::vector<gadget::Pair, std::allocator<gadget::Pair> >::emplace_back<gadget::Pair>(gadget::Pair&&) [33]
+-----------------------------------------------
+                0.00    0.00       1/1           gadget::MinHeap::MinHeap(int) [32]
+[34]     0.0    0.00    0.00       1         void std::vector<gadget::Pair, std::allocator<gadget::Pair> >::_M_realloc_insert<gadget::Pair>(__gnu_cxx::__normal_iterator<gadget::Pair*, std::vector<gadget::Pair, std::allocator<gadget::Pair> > >, gadget::Pair&&) [34]
+-----------------------------------------------
+
+ This table describes the call tree of the program, and was sorted by
+ the total amount of time spent in each function and its children.
+
+ Each entry in this table consists of several lines.  The line with the
+ index number at the left hand margin lists the current function.
+ The lines above it list the functions that called this function,
+ and the lines below it list the functions this one called.
+ This line lists:
+     index	A unique number given to each element of the table.
+		Index numbers are sorted numerically.
+		The index number is printed next to every function name so
+		it is easier to look up where the function is in the table.
+
+     % time	This is the percentage of the `total' time that was spent
+		in this function and its children.  Note that due to
+		different viewpoints, functions excluded by options, etc,
+		these numbers will NOT add up to 100%.
+
+     self	This is the total amount of time spent in this function.
+
+     children	This is the total amount of time propagated into this
+		function by its children.
+
+     called	This is the number of times the function was called.
+		If the function called itself recursively, the number
+		only includes non-recursive calls, and is followed by
+		a `+' and the number of recursive calls.
+
+     name	The name of the current function.  The index number is
+		printed after it.  If the function is a member of a
+		cycle, the cycle number is printed between the
+		function's name and the index number.
+
+
+ For the function's parents, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the function into this parent.
+
+     children	This is the amount of time that was propagated from
+		the function's children into this parent.
+
+     called	This is the number of times this parent called the
+		function `/' the total number of times the function
+		was called.  Recursive calls to the function are not
+		included in the number after the `/'.
+
+     name	This is the name of the parent.  The parent's index
+		number is printed after it.  If the parent is a
+		member of a cycle, the cycle number is printed between
+		the name and the index number.
+
+ If the parents of the function cannot be determined, the word
+ `<spontaneous>' is printed in the `name' field, and all the other
+ fields are blank.
+
+ For the function's children, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the child into the function.
+
+     children	This is the amount of time that was propagated from the
+		child's children to the function.
+
+     called	This is the number of times the function called
+		this child `/' the total number of times the child
+		was called.  Recursive calls by the child are not
+		listed in the number after the `/'.
+
+     name	This is the name of the child.  The child's index
+		number is printed after it.  If the child is a
+		member of a cycle, the cycle number is printed
+		between the name and the index number.
+
+ If there are any cycles (circles) in the call graph, there is an
+ entry for the cycle-as-a-whole.  This entry shows who called the
+ cycle (as parents) and the members of the cycle (as children.)
+ The `+' recursive calls entry shows the number of function calls that
+ were internal to the cycle, and the calls entry for each member shows,
+ for that member, how many times it was called from other members of
+ the cycle.
+
+Copyright (C) 2012-2020 Free Software Foundation, Inc.
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
+
+Index by function name
+
+  [16] sort(int, int, int*, int*, int*) (gm_graph.cc) [12] gadget::Treap::Delete(int, int&) [34] void std::vector<gadget::Pair, std::allocator<gadget::Pair> >::_M_realloc_insert<gadget::Pair>(__gnu_cxx::__normal_iterator<gadget::Pair*, std::vector<gadget::Pair, std::allocator<gadget::Pair> > >, gadget::Pair&&)
+   [5] core::GLIST::ComputeCore(std::vector<std::vector<int, std::allocator<int> >, std::allocator<std::vector<int, std::allocator<int> > > >&, bool, std::vector<int, std::allocator<int> >&) [10] gadget::Treap::Insert(int, bool, int&) [13] void std::vector<int, std::allocator<int> >::_M_realloc_insert<int const&>(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >, int const&)
+  [11] core::GLIST::PropagateDismissal(std::vector<std::vector<int, std::allocator<int> >, std::allocator<std::vector<int, std::allocator<int> > > > const&, int, int, std::vector<int, std::allocator<int> >&, std::vector<int, std::allocator<int> >&, std::vector<int, std::allocator<int> >&) [17] gadget::Treap::Treap(int) [30] std::vector<int, std::allocator<int> >::_M_erase(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >)
+   [8] core::GLIST::Remove(int, int, std::vector<std::vector<int, std::allocator<int> >, std::allocator<std::vector<int, std::allocator<int> > > >&, std::vector<int, std::allocator<int> >&) [32] gadget::MinHeap::MinHeap(int) [19] std::vector<int, std::allocator<int> >::vector(unsigned long, std::allocator<int> const&)
+  [14] core::GLIST::GLIST(int) [21] gm_graph::load_binary_internal(_IO_FILE*, unsigned int, bool) [3] std::pair<std::_Rb_tree_iterator<std::pair<int, int> >, bool> std::_Rb_tree<std::pair<int, int>, std::pair<int, int>, std::_Identity<std::pair<int, int> >, std::less<std::pair<int, int> >, std::allocator<std::pair<int, int> > >::_M_insert_unique<std::pair<int, int> >(std::pair<int, int>&&)
+  [31] core::GLIST::~GLIST()   [2] core::GLIST::Check(std::vector<std::vector<int, std::allocator<int> >, std::allocator<std::vector<int, std::allocator<int> > > > const&, std::vector<int, std::allocator<int> > const&) const [4] std::_Rb_tree<std::pair<int, int>, std::pair<int, int>, std::_Identity<std::pair<int, int> >, std::less<std::pair<int, int> >, std::allocator<std::pair<int, int> > >::_M_get_insert_unique_pos(std::pair<int, int> const&)
+   [1] gadget::CSRReadEdges(char*, int*, int*, bool) [6] gadget::Treap::Rank(int) const [7] std::_Rb_tree<std::pair<int, int>, std::pair<int, int>, std::_Identity<std::pair<int, int> >, std::less<std::pair<int, int> >, std::allocator<std::pair<int, int> > >::_M_erase(std::_Rb_tree_node<std::pair<int, int> >*)
+  [18] gadget::Treap::LeftRotate(int&) [20] int std::uniform_int_distribution<int>::operator()<std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul> >(std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>&, std::uniform_int_distribution<int>::param_type const&) [15] std::__detail::_Map_base<int, std::pair<int const, std::vector<edge_dest_t, std::allocator<edge_dest_t> > >, std::allocator<std::pair<int const, std::vector<edge_dest_t, std::allocator<edge_dest_t> > > >, std::__detail::_Select1st, std::equal_to<int>, std::hash<int>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<false, false, true>, true>::operator[](int const&)
+  [22] gadget::Treap::RightRotate(int&) [33] void std::vector<gadget::Pair, std::allocator<gadget::Pair> >::emplace_back<gadget::Pair>(gadget::Pair&&) [9] void std::__adjust_heap<__gnu_cxx::__normal_iterator<DATA*, std::vector<DATA, std::allocator<DATA> > >, long, DATA, __gnu_cxx::__ops::_Iter_comp_iter<CompareOrder> >(__gnu_cxx::__normal_iterator<DATA*, std::vector<DATA, std::allocator<DATA> > >, long, long, DATA, __gnu_cxx::__ops::_Iter_comp_iter<CompareOrder>)

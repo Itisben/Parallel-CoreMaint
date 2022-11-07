@@ -1,0 +1,55 @@
+cache  from https://stackoverflow.com/questions/18878802/what-is-cache-in-c-programming
+
+Any modern CPU has several layers of cache that are typically named things like L1, L2, L3 or even L4. This is called a multi-level cache. The lower the number, the faster the cache will be.
+
+It's important to remember that the CPU runs at speeds that are significantly faster than the memory subsystem. It takes the CPU a tiny eternity to wait for something to be fetched from system memory, many, many clock-cycles elapse from the time the request is made to when the data is fetched, sent over the system bus, and received by the CPU.
+
+There's no programming construct for dealing with caches, but if your code and data can fit neatly in the L1 cache, then it will be fastest. Next is if it can fit in the L2, and so on. If your code or data cannot fit at all, then you'll be at the mercy of the system memory, which can be orders of magnitude slower.
+
+This is why counter-intuitive things like unrolling loops, which should be faster, might end up being slower because your code becomes too large to fit in cache. It's also why shaving a few bytes off a data structure could pay huge dividends even though the memory footprint barely changes. If it fits neatly in the cache, it will be faster.
+
+The only way to know if you have a performance problem related to caching is to benchmark very carefully. Remember each processor type has varying amounts of cache, so what might work well on your i7 CPU might be relatively terrible on an i5.
+
+It's only in extremely performance sensitive applications that the cache really becomes something you worry about. For example, if you need to maintain a steady 60FPS frame rate in a game, you'll be looking at cache problems constantly. Every millisecond counts here. Likewise, anything that runs the CPU at 100% for extended periods of time, such as rendering video, will want to pay very close attention to how much they could gain from adjusting the code that's emitted.
+
+You do have control over how your code is generated with compiler flags. Some will produce smaller code, some theoretically faster by unrolling loops and other tricks. To find the optimal setting can be a very time-consuming process. Likewise, you'll need to pay very careful attention to your data structures and how they're used.
+
+
+
+
+read graph: /home/guob15/test-graph/test/wikitalk.bin
+set pin CPU
+N = 2394385, M = 5021410
+graph loading time(ms): 116.774000
+********************************************************************************
+# of vertices: 2394385
+# of (all) edges: 4659565
+ratio: 0.000000
+# of edges to insert: 1000000
+# of edges to delete: 0
+path of the input file: /home/guob15/test-graph/test/wikitalk.bin
+method: 3  (2 glist, 1 traversal, or 3 ours)
+graph: 3  (1 for temporal graphs, 0 for ordinary graphs sample edges, 2 for debug without sampled edges)
+            3 csr sample edges, 4 csr without sample edges
+********************************************************************************
+creat adjacent list
+new the working object
+********* initialization!
+initialization costs(ms): 892.654660
+*********begin insertion 3659565 4659565!
+core IorR costs(ms): 11621.030981
+temp edge number 1: 0
+temp edge number 2: 0
+V* size: 1004803
+V+ size: 1101771
+S size: 139340927
+our adjust tag: 61660
+our max relabel tag: 0
+ERROR: check core number passed
+********************************************************************************
+# of om  order: 237758826
+# of om insert: 1066262
+# of om insert mid: 61459
+# of om delete: 1066262
+# of om splite: 68
+********************************************************************************

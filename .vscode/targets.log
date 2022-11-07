@@ -1,0 +1,335 @@
+make all --print-data-base --no-builtin-variables --no-builtin-rules --question
+make: *** No rule to make target 'all'.  Stop.
+
+# GNU Make 4.3
+# Built for x86_64-pc-linux-gnu
+# Copyright (C) 1988-2020 Free Software Foundation, Inc.
+# License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+# This is free software: you are free to change and redistribute it.
+# There is NO WARRANTY, to the extent permitted by law.
+
+# Make data base, printed on Mon Nov  7 09:26:04 2022
+
+# Variables
+
+# environment
+GDK_BACKEND = x11
+# environment
+LC_ALL = C
+# environment
+GNOME_SHELL_SESSION_MODE = ubuntu
+# environment
+SSH_AGENT_LAUNCHER = gnome-keyring
+# environment
+SNAP_INSTANCE_KEY = 
+# environment
+GJS_DEBUG_OUTPUT = stderr
+# environment
+LC_NAME = en_CA.UTF-8
+# environment
+LC_NUMERIC = en_CA.UTF-8
+# environment
+VSCODE_CWD = /home/guob15
+# environment
+WINDOWPATH = 2
+# environment
+LC_ADDRESS = en_CA.UTF-8
+# default
+MAKE_COMMAND := make
+# environment
+QT_ACCESSIBILITY = 1
+# automatic
+@D = $(patsubst %/,%,$(dir $@))
+# environment
+SNAP_INSTANCE_NAME = code
+# environment
+GDK_PIXBUF_MODULEDIR = /snap/code/112/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0/2.10.0/loaders
+# environment
+VSCODE_HANDLES_UNCAUGHT_ERRORS = true
+# default
+.VARIABLES := 
+# environment
+PWD = /home/guob15/github-code/Parallel-CoreMaint
+# automatic
+%D = $(patsubst %/,%,$(dir $%))
+# environment
+XDG_DATA_DIRS = /usr/share/ubuntu-xorg:/usr/share/gnome:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop
+# automatic
+^D = $(patsubst %/,%,$(dir $^))
+# automatic
+%F = $(notdir $%)
+# environment
+VSCODE_CODE_CACHE_PATH = /home/guob15/.config/Code/CachedData/8fa188b2b301d36553cbc9ce1b0a146ccb93351f
+# environment
+LANG = C
+# environment
+XAUTHORITY = /run/user/1001/gdm/Xauthority
+# default
+.LOADED := 
+# default
+.INCLUDE_DIRS = /usr/local/include /usr/include /usr/include
+# makefile
+MAKEFLAGS = pqrR
+# makefile
+CURDIR := /home/guob15/github-code/Parallel-CoreMaint
+# environment
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
+# environment
+LESSOPEN = | /usr/bin/lesspipe %s
+# automatic
+*D = $(patsubst %/,%,$(dir $*))
+# environment
+MFLAGS = -pqrR
+# environment
+SSH_AUTH_SOCK = /run/user/1001/keyring/ssh
+# default
+.SHELLFLAGS := -c
+# environment
+XDG_CONFIG_DIRS = /etc/xdg/xdg-ubuntu-xorg:/etc/xdg
+# automatic
++D = $(patsubst %/,%,$(dir $+))
+# environment
+XDG_SESSION_DESKTOP = ubuntu-xorg
+# makefile
+MAKEFILE_LIST := 
+# environment
+SNAP_REEXEC = 
+# automatic
+@F = $(notdir $@)
+# environment
+VSCODE_PID = 330969
+# environment
+XDG_SESSION_TYPE = x11
+# automatic
+?D = $(patsubst %/,%,$(dir $?))
+# environment
+BAMF_DESKTOP_FILE_HINT = /var/lib/snapd/desktop/applications/code_code.desktop
+# environment
+SESSION_MANAGER = local/error405-MS-7C60:@/tmp/.ICE-unix/7290,unix/error405-MS-7C60:/tmp/.ICE-unix/7290
+# automatic
+*F = $(notdir $*)
+# environment
+CHROME_DESKTOP = code-url-handler.desktop
+# environment
+DBUS_SESSION_BUS_ADDRESS = unix:path=/run/user/1001/bus
+# automatic
+<D = $(patsubst %/,%,$(dir $<))
+# environment
+VSCODE_NLS_CONFIG = {"locale":"en-gb","availableLanguages":{},"_languagePackSupport":true}
+# default
+MAKE_HOST := x86_64-pc-linux-gnu
+# environment
+GNOME_DESKTOP_SESSION_ID = this-is-deprecated
+# makefile
+SHELL = /bin/sh
+# default
+MAKECMDGOALS := all
+# environment
+XMODIFIERS = @im=ibus
+# environment
+GJS_DEBUG_TOPICS = JS ERROR;JS LOG
+# environment
+SHLVL = 0
+# environment
+MAKELEVEL := 0
+# default
+MAKE = $(MAKE_COMMAND)
+# environment
+SNAP_COOKIE = 85hKlW9MSgq5TnGhe78s1KZWTgtkmgGjJ7pfFar3JnSzXbvOTxAD
+# environment
+PATH = /home/guob15/.local/bin:/home/guob15/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin
+# default
+MAKEFILES := 
+# environment
+LANGUAGE = en_CA:en
+# environment
+LC_MONETARY = en_CA.UTF-8
+# automatic
+^F = $(notdir $^)
+# environment
+SNAP_USER_COMMON = /home/guob15/snap/code/common
+# environment
+LC_TIME = en_CA.UTF-8
+# environment
+SNAP = /snap/code/112
+# environment
+INVOCATION_ID = ea57742d60c74a55917df145ba036395
+# environment
+SNAP_REVISION = 112
+# environment
+SNAP_REAL_HOME = /home/guob15
+# environment
+USERNAME = guob15
+# environment
+LC_TELEPHONE = en_CA.UTF-8
+# environment
+LESSCLOSE = /usr/bin/lesspipe %s %s
+# automatic
+?F = $(notdir $?)
+# environment
+XDG_CURRENT_DESKTOP = Unity
+# environment
+LS_COLORS = 
+# automatic
++F = $(notdir $+)
+# environment
+DESKTOP_SESSION = ubuntu-xorg
+# environment
+ORIGINAL_XDG_CURRENT_DESKTOP = ubuntu:GNOME
+# 'override' directive
+GNUMAKEFLAGS := 
+# environment
+LOGNAME = guob15
+# environment
+GIO_LAUNCHED_DESKTOP_FILE = /var/lib/snapd/desktop/applications/code_code.desktop
+# environment
+SNAP_ARCH = amd64
+# makefile
+.DEFAULT_GOAL := 
+# environment
+SYSTEMD_EXEC_PID = 7387
+# environment
+DISPLAY = :0
+# environment
+USER = guob15
+# environment
+GTK_MODULES = gail:atk-bridge
+# default
+MAKE_VERSION := 4.3
+# environment
+SNAP_DATA = /var/snap/code/112
+# environment
+SNAP_CONTEXT = 85hKlW9MSgq5TnGhe78s1KZWTgtkmgGjJ7pfFar3JnSzXbvOTxAD
+# environment
+MANAGERPID = 6675
+# environment
+LC_MEASUREMENT = en_CA.UTF-8
+# environment
+GIO_LAUNCHED_DESKTOP_FILE_PID = 330913
+# environment
+_ = /snap/code/112/usr/share/code/code
+# environment
+LC_PAPER = en_CA.UTF-8
+# environment
+XDG_RUNTIME_DIR = /run/user/1001
+# environment
+GPG_AGENT_INFO = /run/user/1001/gnupg/S.gpg-agent:0:1
+# environment
+GDK_PIXBUF_MODULE_FILE = /home/guob15/snap/code/common/.cache/gdk-pixbuf-loaders.cache
+# environment
+JOURNAL_STREAM = 8:113952
+# environment
+XDG_SESSION_CLASS = user
+# environment
+VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
+# environment
+HOME = /home/guob15
+# environment
+QT_IM_MODULE = ibus
+# environment
+ELECTRON_RUN_AS_NODE = 1
+# environment
+VSCODE_IPC_HOOK = /run/user/1001/vscode-ea79b4da-1.73.0-main.sock
+# environment
+SNAP_NAME = code
+# environment
+GSETTINGS_SCHEMA_DIR = /snap/code/112/usr/share/glib-2.0/schemas
+# environment
+PAPERSIZE = letter
+# default
+.RECIPEPREFIX := 
+# automatic
+<F = $(notdir $<)
+# environment
+SNAP_VERSION = 8fa188b2
+# default
+SUFFIXES := 
+# environment
+VSCODE_CLI = 1
+# environment
+ELECTRON_NO_ATTACH_CONSOLE = 1
+# environment
+SNAP_COMMON = /var/snap/code/common
+# default
+.FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell nocomment grouped-target extra-prereqs archives jobserver output-sync check-symlink load
+# environment
+SNAP_USER_DATA = /home/guob15/snap/code/112
+# environment
+XDG_MENU_PREFIX = gnome-
+# environment
+GDMSESSION = ubuntu-xorg
+# environment
+LC_IDENTIFICATION = en_CA.UTF-8
+# environment
+SNAP_LIBRARY_PATH = /var/lib/snapd/lib/gl:/var/lib/snapd/lib/gl32:/var/lib/snapd/void
+# variable set hash-table stats:
+# Load=125/1024=12%, Rehash=0, Collisions=4/152=3%
+
+# Pattern-specific Variable Values
+
+# No pattern-specific variable values.
+
+# Directories
+
+# . (device 66306, inode 107873311): 16 files, no impossibilities.
+
+# 16 files, no impossibilities in 1 directories.
+
+# Implicit Rules
+
+# No implicit rules.
+
+# Files
+
+# Not a target:
+Makefile:
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has been updated.
+#  Failed to be updated.
+
+# Not a target:
+.DEFAULT:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+all:
+#  Command line target.
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has not been updated.
+
+# Not a target:
+makefile:
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has been updated.
+#  Failed to be updated.
+
+# Not a target:
+GNUmakefile:
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has been updated.
+#  Failed to be updated.
+
+# files hash-table stats:
+# Load=6/1024=1%, Rehash=0, Collisions=0/15=0%
+# VPATH Search Paths
+
+# No 'vpath' search paths.
+
+# No general ('VPATH' variable) search path.
+
+# strcache buffers: 1 (0) / strings = 24 / storage = 243 B / avg = 10 B
+# current buf: size = 8162 B / used = 243 B / count = 24 / avg = 10 B
+ 
+
+# strcache performance: lookups = 27 / hit rate = 11%
+# hash-table stats:
+# Load=24/8192=0%, Rehash=0, Collisions=0/27=0%
+# Finished Make data base on Mon Nov  7 09:26:04 2022
+
+ 

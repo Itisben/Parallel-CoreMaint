@@ -1,0 +1,23 @@
+backup:
+* ours4 is the first correct version for insertion. 
+* ours5 is to finish the deletion. Try to optmize the insertion. 
+    ours5 I optmize the queue, but it still running very slow. 
+    this is because of the S size is much larger than the V* size for some dense cores like k =  33 or larger.
+    e.g in pokc, some times |V*| = 0 but |S| = 56994 because it trapes into the local dense graph.
+   
+* ours6:
+    in this version, in order to reduce the ratio of |S|/V*, the topological order is needed. The order number is stored as array and linked as list. 
+    Finally, the running time of insert is O(|V+| deg ) and remove is O(|v*| deg). This is a little faster than the existing methods.
+    
+core-main/our-seq:
+    this folder includes the code for "simplified algorithms for order-based core maintenance".
+    
+
+
+
+
+three zip folder: 
+This includes two code: core-maint and core-truss-maint for two papers, respectively. 
+and ParaCom-master: Core Maintenance in Dynamic Graphs: A Parallel Approach Based on Matching
+at  https://github.com/icelemonna/ParaCom
+

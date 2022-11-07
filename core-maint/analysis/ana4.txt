@@ -1,0 +1,239 @@
+Flat profile:
+
+Each sample counts as 0.01 seconds.
+  %   cumulative   self              self     total           
+ time   seconds   seconds    calls   s/call   s/call  name    
+ 39.38     11.00    11.00   100000     0.00     0.00  SeqCM::CoreMaint::BeginRemove(int, int)
+ 21.37     16.97     5.97 13820853     0.00     0.00  std::_Rb_tree<std::pair<int, int>, std::pair<int, int>, std::_Identity<std::pair<int, int> >, std::less<std::pair<int, int> >, std::allocator<std::pair<int, int> > >::_M_get_insert_unique_pos(std::pair<int, int> const&)
+ 17.65     21.90     4.93                             gadget::CSRReadEdges(char*, int*, int*, bool)
+  8.05     24.15     2.25                             SeqCM::CoreMaint::ComputeCore(std::vector<std::vector<int, std::allocator<int> >, std::allocator<std::vector<int, std::allocator<int> > > >&, std::vector<int, std::allocator<int> >&, std::vector<int, std::allocator<int> >&)
+  3.81     25.22     1.07        1     1.07     1.07  std::_Rb_tree<std::pair<int, int>, std::pair<int, int>, std::_Identity<std::pair<int, int> >, std::less<std::pair<int, int> >, std::allocator<std::pair<int, int> > >::_M_erase(std::_Rb_tree_node<std::pair<int, int> >*)
+  3.33     26.15     0.93                             SeqCM::CoreMaint::Init(std::vector<int, std::allocator<int> >&)
+  1.72     26.63     0.48                             void std::__adjust_heap<__gnu_cxx::__normal_iterator<DATA*, std::vector<DATA, std::allocator<DATA> > >, long, DATA, __gnu_cxx::__ops::_Iter_comp_iter<CompareOrder> >(__gnu_cxx::__normal_iterator<DATA*, std::vector<DATA, std::allocator<DATA> > >, long, long, DATA, __gnu_cxx::__ops::_Iter_comp_iter<CompareOrder>)
+  1.11     26.94     0.31    79663     0.00     0.00  SeqCM::CoreMaint::FindVs(int)
+  1.07     27.24     0.30    79663     0.00     0.00  SeqCM::CoreMaint::AfterRemove(int)
+  0.75     27.45     0.21                             SeqCM::CoreMaint::EdgeRemove(int, int)
+  0.61     27.62     0.17   100000     0.00     0.00  SeqCM::CoreMaint::BeginRemoveContinue(int, int)
+  0.52     27.76     0.15                             void std::vector<int, std::allocator<int> >::_M_realloc_insert<int const&>(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >, int const&)
+  0.21     27.82     0.06                             sort(int, int, int*, int*, int*)
+  0.18     27.87     0.05                             std::__detail::_Map_base<int, std::pair<int const, std::vector<edge_dest_t, std::allocator<edge_dest_t> > >, std::allocator<std::pair<int const, std::vector<edge_dest_t, std::allocator<edge_dest_t> > > >, std::__detail::_Select1st, std::equal_to<int>, std::hash<int>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<false, false, true>, true>::operator[](int const&)
+  0.14     27.91     0.04 13820853     0.00     0.00  std::pair<std::_Rb_tree_iterator<std::pair<int, int> >, bool> std::_Rb_tree<std::pair<int, int>, std::pair<int, int>, std::_Identity<std::pair<int, int> >, std::less<std::pair<int, int> >, std::allocator<std::pair<int, int> > >::_M_insert_unique<std::pair<int, int> >(std::pair<int, int>&&)
+  0.07     27.93     0.02                             gm_graph::load_binary_internal(_IO_FILE*, unsigned int, bool)
+  0.04     27.94     0.01                             std::vector<std::vector<int, std::allocator<int> >, std::allocator<std::vector<int, std::allocator<int> > > >::~vector()
+  0.00     27.94     0.00    79663     0.00     0.00  SeqCM::CoreMaint::MultiOrderInsert(int, std::vector<int, std::allocator<int> >&)
+  0.00     27.94     0.00    71605     0.00     0.00  SeqCM::CoreMaint::OrderInsert(int, int)
+  0.00     27.94     0.00        4     0.00     0.00  std::vector<int, std::allocator<int> >::reserve(unsigned long)
+  0.00     27.94     0.00        1     0.00     0.00  std::vector<int, std::allocator<int> >::operator=(std::vector<int, std::allocator<int> > const&)
+
+ %         the percentage of the total running time of the
+time       program used by this function.
+
+cumulative a running sum of the number of seconds accounted
+ seconds   for by this function and those listed above it.
+
+ self      the number of seconds accounted for by this
+seconds    function alone.  This is the major sort for this
+           listing.
+
+calls      the number of times this function was invoked, if
+           this function is profiled, else blank.
+
+ self      the average number of milliseconds spent in this
+ms/call    function per call, if this function is profiled,
+	   else blank.
+
+ total     the average number of milliseconds spent in this
+ms/call    function and its descendents per call, if this
+	   function is profiled, else blank.
+
+name       the name of the function.  This is the minor sort
+           for this listing. The index shows the location of
+	   the function in the gprof listing. If the index is
+	   in parenthesis it shows where it would appear in
+	   the gprof listing if it were to be printed.
+
+Copyright (C) 2012-2020 Free Software Foundation, Inc.
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
+
+		     Call graph (explanation follows)
+
+
+granularity: each sample hit covers 2 byte(s) for 0.04% of 27.94 seconds
+
+index % time    self  children    called     name
+                                                 <spontaneous>
+[1]     43.0    4.93    7.08                 gadget::CSRReadEdges(char*, int*, int*, bool) [1]
+                0.04    5.97 13820853/13820853     std::pair<std::_Rb_tree_iterator<std::pair<int, int> >, bool> std::_Rb_tree<std::pair<int, int>, std::pair<int, int>, std::_Identity<std::pair<int, int> >, std::less<std::pair<int, int> >, std::allocator<std::pair<int, int> > >::_M_insert_unique<std::pair<int, int> >(std::pair<int, int>&&) [4]
+                1.07    0.00       1/1           std::_Rb_tree<std::pair<int, int>, std::pair<int, int>, std::_Identity<std::pair<int, int> >, std::less<std::pair<int, int> >, std::allocator<std::pair<int, int> > >::_M_erase(std::_Rb_tree_node<std::pair<int, int> >*) [7]
+-----------------------------------------------
+                                                 <spontaneous>
+[2]     42.9    0.21   11.78                 SeqCM::CoreMaint::EdgeRemove(int, int) [2]
+               11.00    0.00  100000/100000      SeqCM::CoreMaint::BeginRemove(int, int) [3]
+                0.31    0.00   79663/79663       SeqCM::CoreMaint::FindVs(int) [10]
+                0.30    0.00   79663/79663       SeqCM::CoreMaint::AfterRemove(int) [11]
+                0.17    0.00  100000/100000      SeqCM::CoreMaint::BeginRemoveContinue(int, int) [12]
+                0.00    0.00   79663/79663       SeqCM::CoreMaint::MultiOrderInsert(int, std::vector<int, std::allocator<int> >&) [25]
+-----------------------------------------------
+               11.00    0.00  100000/100000      SeqCM::CoreMaint::EdgeRemove(int, int) [2]
+[3]     39.4   11.00    0.00  100000         SeqCM::CoreMaint::BeginRemove(int, int) [3]
+-----------------------------------------------
+                0.04    5.97 13820853/13820853     gadget::CSRReadEdges(char*, int*, int*, bool) [1]
+[4]     21.5    0.04    5.97 13820853         std::pair<std::_Rb_tree_iterator<std::pair<int, int> >, bool> std::_Rb_tree<std::pair<int, int>, std::pair<int, int>, std::_Identity<std::pair<int, int> >, std::less<std::pair<int, int> >, std::allocator<std::pair<int, int> > >::_M_insert_unique<std::pair<int, int> >(std::pair<int, int>&&) [4]
+                5.97    0.00 13820853/13820853     std::_Rb_tree<std::pair<int, int>, std::pair<int, int>, std::_Identity<std::pair<int, int> >, std::less<std::pair<int, int> >, std::allocator<std::pair<int, int> > >::_M_get_insert_unique_pos(std::pair<int, int> const&) [5]
+-----------------------------------------------
+                5.97    0.00 13820853/13820853     std::pair<std::_Rb_tree_iterator<std::pair<int, int> >, bool> std::_Rb_tree<std::pair<int, int>, std::pair<int, int>, std::_Identity<std::pair<int, int> >, std::less<std::pair<int, int> >, std::allocator<std::pair<int, int> > >::_M_insert_unique<std::pair<int, int> >(std::pair<int, int>&&) [4]
+[5]     21.4    5.97    0.00 13820853         std::_Rb_tree<std::pair<int, int>, std::pair<int, int>, std::_Identity<std::pair<int, int> >, std::less<std::pair<int, int> >, std::allocator<std::pair<int, int> > >::_M_get_insert_unique_pos(std::pair<int, int> const&) [5]
+-----------------------------------------------
+                                                 <spontaneous>
+[6]      8.1    2.25    0.00                 SeqCM::CoreMaint::ComputeCore(std::vector<std::vector<int, std::allocator<int> >, std::allocator<std::vector<int, std::allocator<int> > > >&, std::vector<int, std::allocator<int> >&, std::vector<int, std::allocator<int> >&) [6]
+-----------------------------------------------
+                             12610982             std::_Rb_tree<std::pair<int, int>, std::pair<int, int>, std::_Identity<std::pair<int, int> >, std::less<std::pair<int, int> >, std::allocator<std::pair<int, int> > >::_M_erase(std::_Rb_tree_node<std::pair<int, int> >*) [7]
+                1.07    0.00       1/1           gadget::CSRReadEdges(char*, int*, int*, bool) [1]
+[7]      3.8    1.07    0.00       1+12610982 std::_Rb_tree<std::pair<int, int>, std::pair<int, int>, std::_Identity<std::pair<int, int> >, std::less<std::pair<int, int> >, std::allocator<std::pair<int, int> > >::_M_erase(std::_Rb_tree_node<std::pair<int, int> >*) [7]
+                             12610982             std::_Rb_tree<std::pair<int, int>, std::pair<int, int>, std::_Identity<std::pair<int, int> >, std::less<std::pair<int, int> >, std::allocator<std::pair<int, int> > >::_M_erase(std::_Rb_tree_node<std::pair<int, int> >*) [7]
+-----------------------------------------------
+                                                 <spontaneous>
+[8]      3.3    0.93    0.00                 SeqCM::CoreMaint::Init(std::vector<int, std::allocator<int> >&) [8]
+                0.00    0.00       1/1           std::vector<int, std::allocator<int> >::operator=(std::vector<int, std::allocator<int> > const&) [28]
+-----------------------------------------------
+                                                 <spontaneous>
+[9]      1.7    0.48    0.00                 void std::__adjust_heap<__gnu_cxx::__normal_iterator<DATA*, std::vector<DATA, std::allocator<DATA> > >, long, DATA, __gnu_cxx::__ops::_Iter_comp_iter<CompareOrder> >(__gnu_cxx::__normal_iterator<DATA*, std::vector<DATA, std::allocator<DATA> > >, long, long, DATA, __gnu_cxx::__ops::_Iter_comp_iter<CompareOrder>) [9]
+-----------------------------------------------
+                0.31    0.00   79663/79663       SeqCM::CoreMaint::EdgeRemove(int, int) [2]
+[10]     1.1    0.31    0.00   79663         SeqCM::CoreMaint::FindVs(int) [10]
+-----------------------------------------------
+                0.30    0.00   79663/79663       SeqCM::CoreMaint::EdgeRemove(int, int) [2]
+[11]     1.1    0.30    0.00   79663         SeqCM::CoreMaint::AfterRemove(int) [11]
+-----------------------------------------------
+                0.17    0.00  100000/100000      SeqCM::CoreMaint::EdgeRemove(int, int) [2]
+[12]     0.6    0.17    0.00  100000         SeqCM::CoreMaint::BeginRemoveContinue(int, int) [12]
+-----------------------------------------------
+                                                 <spontaneous>
+[13]     0.5    0.15    0.00                 void std::vector<int, std::allocator<int> >::_M_realloc_insert<int const&>(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >, int const&) [13]
+-----------------------------------------------
+                                                 <spontaneous>
+[14]     0.2    0.06    0.00                 sort(int, int, int*, int*, int*) [14]
+-----------------------------------------------
+                                                 <spontaneous>
+[15]     0.2    0.05    0.00                 std::__detail::_Map_base<int, std::pair<int const, std::vector<edge_dest_t, std::allocator<edge_dest_t> > >, std::allocator<std::pair<int const, std::vector<edge_dest_t, std::allocator<edge_dest_t> > > >, std::__detail::_Select1st, std::equal_to<int>, std::hash<int>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<false, false, true>, true>::operator[](int const&) [15]
+-----------------------------------------------
+                                                 <spontaneous>
+[16]     0.1    0.02    0.00                 gm_graph::load_binary_internal(_IO_FILE*, unsigned int, bool) [16]
+-----------------------------------------------
+                                                 <spontaneous>
+[17]     0.0    0.01    0.00                 std::vector<std::vector<int, std::allocator<int> >, std::allocator<std::vector<int, std::allocator<int> > > >::~vector() [17]
+-----------------------------------------------
+                0.00    0.00   79663/79663       SeqCM::CoreMaint::EdgeRemove(int, int) [2]
+[25]     0.0    0.00    0.00   79663         SeqCM::CoreMaint::MultiOrderInsert(int, std::vector<int, std::allocator<int> >&) [25]
+                0.00    0.00   71605/71605       SeqCM::CoreMaint::OrderInsert(int, int) [26]
+-----------------------------------------------
+                0.00    0.00   71605/71605       SeqCM::CoreMaint::MultiOrderInsert(int, std::vector<int, std::allocator<int> >&) [25]
+[26]     0.0    0.00    0.00   71605         SeqCM::CoreMaint::OrderInsert(int, int) [26]
+-----------------------------------------------
+                0.00    0.00       4/4           SeqCM::CoreMaint::CoreMaint(unsigned long, std::vector<std::vector<int, std::allocator<int> >, std::allocator<std::vector<int, std::allocator<int> > > >&, std::vector<int, std::allocator<int> >&) [77]
+[27]     0.0    0.00    0.00       4         std::vector<int, std::allocator<int> >::reserve(unsigned long) [27]
+-----------------------------------------------
+                0.00    0.00       1/1           SeqCM::CoreMaint::Init(std::vector<int, std::allocator<int> >&) [8]
+[28]     0.0    0.00    0.00       1         std::vector<int, std::allocator<int> >::operator=(std::vector<int, std::allocator<int> > const&) [28]
+-----------------------------------------------
+
+ This table describes the call tree of the program, and was sorted by
+ the total amount of time spent in each function and its children.
+
+ Each entry in this table consists of several lines.  The line with the
+ index number at the left hand margin lists the current function.
+ The lines above it list the functions that called this function,
+ and the lines below it list the functions this one called.
+ This line lists:
+     index	A unique number given to each element of the table.
+		Index numbers are sorted numerically.
+		The index number is printed next to every function name so
+		it is easier to look up where the function is in the table.
+
+     % time	This is the percentage of the `total' time that was spent
+		in this function and its children.  Note that due to
+		different viewpoints, functions excluded by options, etc,
+		these numbers will NOT add up to 100%.
+
+     self	This is the total amount of time spent in this function.
+
+     children	This is the total amount of time propagated into this
+		function by its children.
+
+     called	This is the number of times the function was called.
+		If the function called itself recursively, the number
+		only includes non-recursive calls, and is followed by
+		a `+' and the number of recursive calls.
+
+     name	The name of the current function.  The index number is
+		printed after it.  If the function is a member of a
+		cycle, the cycle number is printed between the
+		function's name and the index number.
+
+
+ For the function's parents, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the function into this parent.
+
+     children	This is the amount of time that was propagated from
+		the function's children into this parent.
+
+     called	This is the number of times this parent called the
+		function `/' the total number of times the function
+		was called.  Recursive calls to the function are not
+		included in the number after the `/'.
+
+     name	This is the name of the parent.  The parent's index
+		number is printed after it.  If the parent is a
+		member of a cycle, the cycle number is printed between
+		the name and the index number.
+
+ If the parents of the function cannot be determined, the word
+ `<spontaneous>' is printed in the `name' field, and all the other
+ fields are blank.
+
+ For the function's children, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the child into the function.
+
+     children	This is the amount of time that was propagated from the
+		child's children to the function.
+
+     called	This is the number of times the function called
+		this child `/' the total number of times the child
+		was called.  Recursive calls by the child are not
+		listed in the number after the `/'.
+
+     name	This is the name of the child.  The child's index
+		number is printed after it.  If the child is a
+		member of a cycle, the cycle number is printed
+		between the name and the index number.
+
+ If there are any cycles (circles) in the call graph, there is an
+ entry for the cycle-as-a-whole.  This entry shows who called the
+ cycle (as parents) and the members of the cycle (as children.)
+ The `+' recursive calls entry shows the number of function calls that
+ were internal to the cycle, and the calls entry for each member shows,
+ for that member, how many times it was called from other members of
+ the cycle.
+
+Copyright (C) 2012-2020 Free Software Foundation, Inc.
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
+
+Index by function name
+
+  [14] sort(int, int, int*, int*, int*) (gm_graph.cc) [12] SeqCM::CoreMaint::BeginRemoveContinue(int, int) [27] std::vector<int, std::allocator<int> >::reserve(unsigned long)
+   [2] SeqCM::CoreMaint::EdgeRemove(int, int) [8] SeqCM::CoreMaint::Init(std::vector<int, std::allocator<int> >&) [28] std::vector<int, std::allocator<int> >::operator=(std::vector<int, std::allocator<int> > const&)
+  [11] SeqCM::CoreMaint::AfterRemove(int) [10] SeqCM::CoreMaint::FindVs(int) [4] std::pair<std::_Rb_tree_iterator<std::pair<int, int> >, bool> std::_Rb_tree<std::pair<int, int>, std::pair<int, int>, std::_Identity<std::pair<int, int> >, std::less<std::pair<int, int> >, std::allocator<std::pair<int, int> > >::_M_insert_unique<std::pair<int, int> >(std::pair<int, int>&&)
+   [3] SeqCM::CoreMaint::BeginRemove(int, int) [1] gadget::CSRReadEdges(char*, int*, int*, bool) [5] std::_Rb_tree<std::pair<int, int>, std::pair<int, int>, std::_Identity<std::pair<int, int> >, std::less<std::pair<int, int> >, std::allocator<std::pair<int, int> > >::_M_get_insert_unique_pos(std::pair<int, int> const&)
+   [6] SeqCM::CoreMaint::ComputeCore(std::vector<std::vector<int, std::allocator<int> >, std::allocator<std::vector<int, std::allocator<int> > > >&, std::vector<int, std::allocator<int> >&, std::vector<int, std::allocator<int> >&) [16] gm_graph::load_binary_internal(_IO_FILE*, unsigned int, bool) [7] std::_Rb_tree<std::pair<int, int>, std::pair<int, int>, std::_Identity<std::pair<int, int> >, std::less<std::pair<int, int> >, std::allocator<std::pair<int, int> > >::_M_erase(std::_Rb_tree_node<std::pair<int, int> >*)
+  [26] SeqCM::CoreMaint::OrderInsert(int, int) [17] std::vector<std::vector<int, std::allocator<int> >, std::allocator<std::vector<int, std::allocator<int> > > >::~vector() [15] std::__detail::_Map_base<int, std::pair<int const, std::vector<edge_dest_t, std::allocator<edge_dest_t> > >, std::allocator<std::pair<int const, std::vector<edge_dest_t, std::allocator<edge_dest_t> > > >, std::__detail::_Select1st, std::equal_to<int>, std::hash<int>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<false, false, true>, true>::operator[](int const&)
+  [25] SeqCM::CoreMaint::MultiOrderInsert(int, std::vector<int, std::allocator<int> >&) [13] void std::vector<int, std::allocator<int> >::_M_realloc_insert<int const&>(__gnu_cxx::__normal_iterator<int*, std::vector<int, std::allocator<int> > >, int const&) [9] void std::__adjust_heap<__gnu_cxx::__normal_iterator<DATA*, std::vector<DATA, std::allocator<DATA> > >, long, DATA, __gnu_cxx::__ops::_Iter_comp_iter<CompareOrder> >(__gnu_cxx::__normal_iterator<DATA*, std::vector<DATA, std::allocator<DATA> > >, long, long, DATA, __gnu_cxx::__ops::_Iter_comp_iter<CompareOrder>)
