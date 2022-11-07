@@ -18,14 +18,15 @@ This is the paralle vesion of order-based core maintenance. The experiments test
 * **ours-csr-new**: this folder contains the code for our sequential and parlalel core maintenance algorithm; it also includes the paralell OM source files that used for our parallel core maintenance method.
 
 
-1. ```~/experiment/```: include all the experiment scripts.
+2. ```~/experiment/```: include all the experiment scripts.
 * **ParCM-Test.sh**: the shell script that can run the experiment and get the test result as csv files.
 * **ParCM-parse-output.py**: the python script called by benchmark.sh to parse the test result.
 * **results**: this folder contains all the tested results. 
 * **convert**: this folder contains all the python script that transfer the test results to the figures and table that can be included in the paper.
 
-1. ```~/FasterCoreMaintenance```: the Edge Join methods. 
+3. ```~/FasterCoreMaintenance```: the Edge Join method. 
 
+4. ```~/ParaCoM-master```: the other compared method.
 
 
 # Compiling and Executing
