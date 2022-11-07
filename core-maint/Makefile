@@ -5,16 +5,14 @@ LIBDIR=./gm_graph/lib
 LIB=gmgraph
 LFLAGS=-L$(LIBDIR) -l$(LIB)
 
-#CFLAGS=-c -I. -std=c++0x -Wfatal-errors
-#CFLAGS=-c -I. -I$(INCDIR) -std=c++0x -Wfatal-errors
-# CFLAGS=-c -I. -I$(INCDIR) -fopenmp  -std=gnu++0x -fpermissive -Wfatal-errors -w
-# CFLAGS2=-I. -I$(INCDIR) -fopenmp  -std=gnu++0x -fpermissive -Wfatal-errors -w
 CFLAGS=-c -I. -I$(INCDIR) -fopenmp  -std=gnu++0x -fpermissive -Wfatal-errors
 CFLAGS2=-I. -I$(INCDIR) -fopenmp  -std=gnu++0x -fpermissive -Wfatal-errors
 INCFILES = $(shell ls $(INCDIR))
 H_FILES = $(addprefix $(INCDIR)/, $(INCFILES))
 
 OUTDIR=./
+
+all: core
 
 debug: CC+= -ggdb 
 

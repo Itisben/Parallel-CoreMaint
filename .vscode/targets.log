@@ -8,7 +8,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Mon Nov  7 09:48:26 2022
+# Make data base, printed on Mon Nov  7 10:37:51 2022
 
 # Variables
 
@@ -122,7 +122,6 @@ MAKE_HOST := x86_64-pc-linux-gnu
 GNOME_DESKTOP_SESSION_ID = this-is-deprecated
 # makefile
 SHELL = /bin/sh
- 
 # default
 MAKECMDGOALS := all
 # environment
@@ -210,7 +209,6 @@ GIO_LAUNCHED_DESKTOP_FILE_PID = 330913
 # environment
 _ = /snap/code/112/usr/share/code/code
 # environment
- 
 LC_PAPER = en_CA.UTF-8
 # environment
 XDG_RUNTIME_DIR = /run/user/1001
@@ -273,9 +271,9 @@ SNAP_LIBRARY_PATH = /var/lib/snapd/lib/gl:/var/lib/snapd/lib/gl32:/var/lib/snapd
 
 # Directories
 
-# . (device 66306, inode 107873311): 11 files, no impossibilities.
+# . (device 66306, inode 107873311): 10 files, no impossibilities.
 
-# 11 files, no impossibilities in 1 directories.
+# 10 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -287,7 +285,6 @@ SNAP_LIBRARY_PATH = /var/lib/snapd/lib/gl:/var/lib/snapd/lib/gl32:/var/lib/snapd
 Makefile:
 #  Implicit rule search has been done.
 #  File does not exist.
- 
 #  File has been updated.
 #  Failed to be updated.
 
@@ -326,12 +323,12 @@ GNUmakefile:
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 19 / storage = 201 B / avg = 10 B
-# current buf: size = 8162 B / used = 201 B / count = 19 / avg = 10 B
+# strcache buffers: 1 (0) / strings = 18 / storage = 184 B / avg = 10 B
+# current buf: size = 8162 B / used = 184 B / count = 18 / avg = 10 B
 
-# strcache performance: lookups = 22 / hit rate = 13%
+# strcache performance: lookups = 21 / hit rate = 14%
 # hash-table stats:
-# Load=19/8192=0%, Rehash=0, Collisions=0/22=0%
-# Finished Make data base on Mon Nov  7 09:48:26 2022
+# Load=18/8192=0%, Rehash=0, Collisions=0/21=0%
+# Finished Make data base on Mon Nov  7 10:37:51 2022
 
  

@@ -12,8 +12,6 @@
 #include "gadget/gadget.h"
 #include "glist/glist.h"
 #include "traversal/traversal.h"
-//#include "ours-seq/core-maint.h"
-//#include "ours-seq-csr/core-maint-csr.h"
 #include "ours-csr-new/seq-csr-new.h"
 #include "ours-csr-new/par-csr-new.h"
 #include "ours-csr-new/par-om.h"
@@ -532,38 +530,7 @@ int main(int argc, char** argv) {
    
     }
     
-    /*
-    if (method%10 != 3) {
-        for (int i = m2; i < m; ++i) {
-            //cm->Insert(edges[i].first, edges[i].second, graph, core);
-            if(g_debug) {
-            //cm->ComputeCore(graph, false, tmp_core);
-            //ASSERT_INFO(tmp_core == core, "wrong result after insert");
-            }
-        }
-    } else { // ours
-            if (method/10 == 1) {
-                // //int repeat = ourcm->BatchEdgeInsert(edges, m2, m); 
-                //     if(g_debug) {
-                //         // check each time. 
-                //         ourcm->ComputeCore(graph, tmp_core, order_v, false);
-                //         int r = ourcm->Check(-1, -1, -1, tmp_core, order_v);  
-                //     }
-
-                // printf("batch insertion repeat: %d\n", repeat);
-            } else 
-            {
-                for (int i = m2; i < m; ++i) {
-                    ourcm->EdgeInsert(edges[i].first, edges[i].second);
-                    if (g_debug) {
-                        // check each time. 
-                        ourcm->ComputeCore(graph, tmp_core, order_v, false);
-                        int r = ourcm->Check(edges[i].first, edges[i].second, i - m2, tmp_core, order_v);  
-                    }
-        }
-            }
-    }
-    */
+    
 
 
   const auto ins_end = std::chrono::steady_clock::now();
@@ -572,10 +539,6 @@ int main(int argc, char** argv) {
          //std::chrono::duration<double, std::milli>(ins_dif).count());
     printf("\ncore IorR costs(ms): %f\n\n", std::chrono::duration<double, std::milli>(ins_dif).count());
 
-
-  /*see count*/
-    // printf("temp edge number 1: %d\n", cnt_edge);
-    // printf("temp edge number 2: %d\n", cnt_edge2);
     
     printf("V* size: %d\n", cnt_Vs);
     printf("V+ size: %d\n", cnt_Vp);
@@ -586,22 +549,6 @@ int main(int argc, char** argv) {
   /*see count end*/
 
 
-  // verify the result
-//   {
-//     ERROR("check: insert", false);
-    
-//     if (method%10 != 3) {
-//       cm->ComputeCore(graph, false, tmp_core);
-//       cm->Check(graph, core);
-//     }else {
-//       ourcm->ComputeCore(graph, tmp_core, order_v, false);
-//       ourcm->Check(-1, -1, -1, tmp_core, order_v);
-//     }
-
-  
-//     ERROR("check passed", false);
-
-//   }c
 goto END;
 #endif // insert edge. 
 
@@ -648,10 +595,6 @@ REMOVE:
             vector<node_t> groups; groups.reserve(reserve_size);
             vector<bool> A(reserve_size, false);
             
-            // const auto mem_end = std::chrono::steady_clock::now();
-            // const auto mem_dif = mem_end - mem_beg;
-            // printf("\n memory costs(ms): %f\n\n", std::chrono::duration<double, std::milli>(mem_dif).count());  
-
             for (int i = m-1; i >= m2; --i) {
                 ourparcm->EdgeRemove(edges[i].first, edges[i].second, R, Vblack, A, groups, 0);
                 if (g_debug > 1) {
@@ -668,8 +611,7 @@ REMOVE:
     }
   const auto rmv_end = std::chrono::steady_clock::now();
   const auto rmv_dif = rmv_end - rmv_beg;
-  //printf("core remove costs \x1b[1;31m%f\x1b[0m ms\n",
-        // std::chrono::duration<double, std::milli>(rmv_dif).count());
+
   printf("\ncore IorR costs(ms): %f\n\n", std::chrono::duration<double, std::milli>(rmv_dif).count());  
 
   /*see count*/
@@ -690,10 +632,7 @@ END:
     {
         int result = 0;
         if (method%10 != 3) {
-        //   std::vector<int> tmp_core(n);
-        //   cm->ComputeCore(graph, false, tmp_core);
-        //   ASSERT_INFO(tmp_core == core, "wrong result after remove");
-        //   cm->Check(graph, core);
+
         } else {
             ourcm->ComputeCore(tmp_core, order_v, false);
             result = ourcm->CheckCore(tmp_core, false);
@@ -745,15 +684,7 @@ END:
             fclose(file);
             printf("\n");
 
-            // printf("\n");
-            // i = 0; 
-            // for(auto cnt: Vcount2) {
-            //     if (cnt > 0) {
-            //         printf("Vom, %d, %d\n", i, cnt); 
-            //     }
-            //     ++i;
-            // }
-            // printf("\n");
+          
 
 
             ourparcm->ComputeCore(tmp_core, order_v, false);
@@ -789,14 +720,6 @@ END:
             
         }
     }
-
-    // gadget::RepeatWith('*', 80);
-    // printf("# of om  order: %d\n", cnt_omorder);
-    // printf("# of om insert: %d\n", cnt_ominsert);
-    // printf("# of om insert mid: %d\n", cnt_ominsert_mid);
-    // printf("# of om delete: %d\n", cnt_omdelete);
-    // printf("# of om splite: %d\n", cnt_omsplit);
-    // gadget::RepeatWith('*', 80);
 
 
 

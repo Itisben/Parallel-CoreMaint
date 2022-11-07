@@ -1,6 +1,4 @@
-<<<<<<< HEAD
-This is the C++ code for the draft paper "Parallel Order-Based Core Maintenance in Dynamic Graphs". The experiments test two method, our parallel order based method  
-=======
+
 This is the paralle vesion of order-based core maintenance. The experiments test two methods, the edge-join method and our order-based method.
 
 # The Structure of the Folder
@@ -18,7 +16,7 @@ This is the paralle vesion of order-based core maintenance. The experiments test
 * **gm_graph**: this folder is to generate a library that can support loading the CSR format of graphs. 
 * **glist**: this folder contains the code for the order-based core maintenance algorithm
 * **ours-csr-new**: this folder contains the code for our sequential and parlalel core maintenance algorithm; it also includes the paralell OM source files that used for our parallel core maintenance method.
->>>>>>> 0a8a4bebc48fcb0e8237444014331ec9ab63db42
+
 
 2. ```~/experiment/```: include all the experiment scripts.
 * **ParCM-Test.sh**: the shell script that can run the experiment and get the test result as csv files.
