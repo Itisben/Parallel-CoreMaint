@@ -61,21 +61,6 @@ static void lock(lock_t *caslock, omp_lock_t *omplock) {
     }
 }
 
-//extern std::vector<int> Vcount; // count the Vblack size frequency.
-//extern std::vector<int> Vcount2; // count the inserted or removed to OM for each K.
-
-// inline static bool getInQ(unsigned int i) {
-//     return i >> 31;
-// }
-
-// inline static void setInQ(unsigned int &i) {
-//     i |=0x80000000;
-// }
-// inline static int getDeg(unsigned int i) {
-//     return i &= 0xefffffff
-// }
-// inline static int setDeg(unsigned int &i)
-
 extern int g_wait_i; 
 /********************NODE****************************/
 ParCM::Node::Node(){
@@ -220,44 +205,7 @@ void ParCM::Node::UnlockP() {
         islock = EMPTY;
     }
 }
-// void ParCM::Node::NestLock() {
 
-// }
-
-// void ParCM::Node::NestUnlock() {
-
-// }
-
-// bool ParCM::Node::Lockp(int p) {
-//     if ( likely(CAS_LOCK == g_lock_type) ) {
-//         int i = BUSYWAIT_I;
-//         while (atomic_read(&lock_cas) != p) {
-//             if (atomic_read(&lock_cas) == UNLOCK && cas(&lock_cas, UNLOCK, p)) {
-//                     return true; // lock successfully.
-//             }
-//             power_busy_wait(i);
-//         }
-//         return false; // already locked by worker p.
-//     } else if (OMP_LOCK == g_lock_type){ //omp lock
-//         omp_set_lock(&lock_omp);
-//     }
-// }
-
-/*this is only work for cas lock*/
-// bool ParCM::Node::TestCoreLock(core_t K, core_t & current_k) {
-//     if (likely(CAS_LOCK == g_lock_type)) {
-//         while (K == current_k) {
-//             if (lock_cas == UNLOCK) {
-//                 if (cas(&lock_cas, UNLOCK, LOCK)) {
-//                     return true;
-//                 }
-//             }
-//         }
-//         return false;
-//     } else if (OMP_LOCK == g_lock_type){ //omp lock
-//         omp_set_lock(&omlock_omp);
-//     }
-// }
 
 bool ParCM::Node::LockWithCore(const core_t k, core_t *core) {
     if (likely(CAS_LOCK == g_lock_type)) {
@@ -1065,17 +1013,6 @@ DOLOCK:
 
     const group_t g0 = V[x].group;
     
-    // update group size, delete when group is empty. 
-    // not affect the correctness but left empty groups for recycling. 
-    /*
-    --G[g0].size; 
-    atomic_sub(&G[g0].size, 1);
-    assert(G[g0].size >= 0);
-    if(0 == G[g0].size) {
-        TopListDelete(g0); 
-    }
-    */
-
     //V[x].group = EMPTY;  // remove this for segment errors when doing Order(x, y).
     ListDelete(x); 
     
@@ -1092,7 +1029,6 @@ void ParCM::CoreMaint::OrderInsertHeadBatch(core_t k, vector<node_t> &y, vector<
     if (y.empty()) return;
     cnt_ominsert+=y.size();
 
-#if 1
     // lock head and head.next in order, 
     // all x in y not locked since the edgeinsert is not allowed this happen
     V[H[k]].OMLock(); 
@@ -1134,36 +1070,7 @@ void ParCM::CoreMaint::OrderInsertHeadBatch(core_t k, vector<node_t> &y, vector<
     V[H[k]].OMUnlock(); V[xnext].OMUnlock(); 
     G[Hg[k]].OMUnlock(); G[gnext].OMUnlock();
 
-#else // compact all to a group.
-    const group_t g_head = G[Hg[k]].next;
-    const node_t n_head = V[H[k]].next;
-    const tag_t tag0 = G[g_head].tag;
-    
-    int group_num = y.size()/MAX_GROUP_SIZE + 1;
-    
-    //insert groups
-    groups.clear();
-    for(size_t group_id = group_size; group_id < group_size + group_num; group_id++) {
-        assert(group_id < 2 * n); // at most 2n groups.
-        groups.push_back(group_id);
-    }
-    group_size += group_num;
-    MultiTopListInsert(Hg[k], groups); // insert to group head
 
-    assert(tag0 > INIT_TAG_GAP * groups.size());
-    size_t j = 0; 
-    for(size_t i = 0; i < groups.size(); i++) {
-        const group_t g = groups[i];
-        G[g].tag = tag0 - (groups.size() - i) * INIT_TAG_GAP;
-        for(size_t j = 0; j < MAX_GROUP_SIZE; j++) {
-            size_t idx = i * MAX_GROUP_SIZE + j;
-            if (idx >= y.size()) break;
-            V[y[idx]].group = g; G[g].size++;
-            V[y[idx]].subtag = j * (MAX_SUBTAG/MAX_GROUP_SIZE); ++cnt_tag;
-        }
-    }
-    MultiListInsert(H[k], y);
-#endif 
 }
 
 
@@ -1171,7 +1078,6 @@ void ParCM::CoreMaint::OrderInsertHeadBatch(core_t k, vector<node_t> &y, vector<
 /*insert new nodes to tail without relabeling*/
 void ParCM::CoreMaint::OrderInsertTail(core_t k, node_t y) {
     ++cnt_ominsert;
-#if 1
 DOLOCK:
     // lock tail.pre and tail in order.
     node_t xpre = V[T[k]].pre;
@@ -1211,34 +1117,6 @@ DOLOCK:
     V[xpre].OMUnlock(); V[T[k]].OMUnlock(); 
     G[gpre].OMUnlock(); G[Tg[k]].OMUnlock(); 
 
-#else // compact the tail for inserting more nodes. 
-    const group_t g_tail = G[Tg[k]].pre;
-    const node_t n_tail = V[T[k]].pre;
-    if (n_tail == H[k]) { // list is empty
-        /*insert a new group*/
-        const group_t group_id = group_size;
-        groups.push_back(group_id);
-        group_size++;
-        TopListInsert(g_tail, group_id);
-        V[y].group = group_id; G[y].size++;
-        V[y].subtag = MAX_SUBTAG/MAX_GROUP_SIZE; ++cnt_tag;
-        return;
-    }
-    const subtag_t subtag0 = V[n_tail].subtag;
-    if (MAX_SUBTAG - subtag0 > MAX_SUBTAG/MAX_GROUP_SIZE) {
-        ListInsert(n_tail, y);
-        V[y].group = g_tail; G[y].size++;
-        V[y].subtag = subtag0 + MAX_SUBTAG/MAX_GROUP_SIZE;
-    } else {
-        /*insert a new group*/
-        const group_t group_id = group_size;
-        groups.push_back(group_id);
-        group_size++;
-        TopListInsert(g_tail, group_id);
-        V[y].group = group_id; G[y].size++;
-        V[y].subtag = MAX_SUBTAG/MAX_GROUP_SIZE; ++cnt_tag;
-    }
-#endif
 }
 
 
@@ -1246,7 +1124,7 @@ void ParCM::CoreMaint::OrderInsertTailBatch(core_t k, vector<node_t> &y, vector<
     if (y.empty()) return;
     cnt_ominsert+=y.size();
 
-#if 1  
+
     // load tail.pre and tail in order. 
     // all y insert after the tail with y.size groups.
 DOLOCK:
@@ -1293,7 +1171,7 @@ DOLOCK:
     V[xpre].OMUnlock(); V[T[k]].OMUnlock(); 
     G[gpre].OMUnlock(); G[Tg[k]].OMUnlock(); 
 
-#endif 
+
 }
 
 /*how to do with flush*/
@@ -1436,16 +1314,7 @@ int ParCM::CoreMaint::EdgeInsert(node_t u, edge_t v, PRIORITY_Q &PQ, QUEUE &R,
 
     thread_local int wait_i = BUSYWAIT_I;
 RELOCK:
-    // lock in order by assuming order u < v
-    // if (!Order(u, v)) std::swap(u, v);
-    
-    // V[u].LockP(p); //V[u].Lock(); V[u].islock = p;
-    
-    // if (!Order(u, v)) {
-    //     V[u].UnlockP(); //V[u].islock = NONE; V[u].Unlock(); 
-    //     goto DOLOCK;
-    // }
-    // V[v].LockP(p); // V[v].Lock(); V[v].islock = p;
+  
 
     if (u < v) {
         if ( V[u].TestLockP(p) ) {
@@ -1501,8 +1370,6 @@ RELOCK:
     node_t w = u; // w is locked
     do {
         
-        // V[w].degin = Qdegin[w]; 
-        // Qdegin[w] = 0;
 
         /*recalculate the degin*/
         deg_t local_degin = 0;
@@ -1545,14 +1412,7 @@ RELOCK:
              
         }
     }
-#if 0
-    //insert Vb2 (ordered black nodes) to the head of O_k+1
-    // MultiOrderInsert(H[K+1], Vblack);
-    node_t pos_x = H[K+1];
-    for(const node_t v: Vblack) {
-        OrderInsert(pos_x, v); pos_x = v;
-    }
-#else 
+
     if (0 == optBufferQ) {
         OrderInsertHeadBatch(K+1, Vblack, groups);
     } else {
@@ -1561,32 +1421,6 @@ RELOCK:
     for (const node_t w: Vblack) {
         atomic_add(&V[w].s, 1); // s is even, lable is useful.
     }
-
-#endif
-
-
-/*update the mcd, our new method don't 
-since the mcd is generated online*/
-#if 0
-    if (Vblack.empty()) {
-        if (core[u] <= core[v]) V[u].mcd++;
-        if (core[v] <= core[u]) V[v].mcd++;
-    } else {
-        for (const node_t u: Vblack) {
-            deg_t mcd = 0;
-            //for (const node_t v: graph[u]) {
-            for (int i = graph.begin[u]; i < graph.end[u]; i++){
-                node_t v = graph.node_idx[i];
-                if (core[u] <= core[v]) mcd++;
-                //u.core +1 for v. u->v
-                if (BLACK != V[v].color && core[u] == core[v]) {
-                    V[v].mcd++;
-                }
-            }
-            V[u].mcd = mcd;
-        }
-    }
-#endif 
 
     //reset all color
     for(const node_t u: Vcolor) {
@@ -1608,7 +1442,6 @@ void ParCM::PRIORITY_Q::enqueue(id_t *ver, DATA &d) {
     if (ver2 != atomic_read(ver) || ver2 != version) {
         version = EMPTY;
     } 
-    //version = EMPTY; // debug ???
 }
 
 node_t ParCM::PRIORITY_Q::dequeue(id_t *ver, id_t *cnt, core_t K, vector<Node> &V, vector<Group> &G, 
@@ -1803,30 +1636,13 @@ int ParCM::CoreMaint::ParallelEdgeRemove(vector<pair<int, int>> &edges,
         #pragma omp for schedule(dynamic, parallel_step)
         //#pragma omp for
         for (int i = m-1; i >= m2; --i) {
-        //for (int i = m2; i < m; ++i) {
             node_t u = edges[i].first; node_t v = edges[i].second;
             EdgeRemove(u, v, R, Vblack, A, groups, workerid);
- #if 0           
-            if(g_debug) 
-                printf("**************remove (%d, %d) by worker %d************\n", u, v, workerid);
-
-            if (g_debug) {
-                CheckAllMCDValue(true);
-            }
-#endif
         }
     }
     
     } 
-    // else {
-    //     const size_t reserve_size = 1024 * 16;
-    //     QUEUE R(reserve_size);
-    //     vector<node_t> Vblack; Vblack.reserve(reserve_size);
-
-    //     for (int i = m2; i < m; ++i) {
-    //         EdgeRemove(edges[i].first, edges[i].second, R, Vblack);
-    //     }
-    // }
+ 
 
     return 0;
 }
@@ -1953,13 +1769,7 @@ REDO:
 /*u is locked, R is local*/
 void ParCM::CoreMaint::DoMCD(node_t u, core_t k, QUEUE &R, vector<node_t> &Vblack) {
 
-    //if (!V[u].IsLocked()) {
-        //ASSERT( V[u].IsLocked() ); // u is locked   
-    //} 
-    //if (V[u].mcd  < k ) {
-        ASSERT( V[u].mcd  >= k ); // u.mcd >= u.core
-    //}
-    //atomic_sub(&V[u].mcd, 1);
+  
     
     --V[u].mcd;
     if ( V[u].mcd  < k ) { // u.mcd
@@ -1997,15 +1807,10 @@ void ParCM::CoreMaint::CheckMCD(node_t u, core_t k, node_t from_v) {
     } 
     if (EMPTY != atomic_read(&V[u].mcd)) { return; }
 
-    // if (19659 == u) {
-    //     printf("debug\n");
-    // }
+
 
     deg_t mcd = 0; 
-    
-    // for (int idx = graph.begin[u]; idx < graph.end[u]; idx++){
-    //     node_t v = graph.node_idx[idx];
-    
+
     GRAPH_EDGE(u, v)
 #if USE_S_LOCK
         //lock
@@ -2029,7 +1834,6 @@ void ParCM::CoreMaint::CheckMCD(node_t u, core_t k, node_t from_v) {
                     }
                     if (atomic_read(&V[v].s) == 0) { 
                         --mcd;
-                        printf(" ********  mcd-- with s=0");
                     }
                 }
             }
@@ -2042,8 +1846,7 @@ void ParCM::CoreMaint::CheckMCD(node_t u, core_t k, node_t from_v) {
         } 
 
         core_t k2 = atomic_read(&core[v]); int s2 = atomic_read(&V[v].s);
-        //if (k1 != k2) {printf(" ====== %d change core number %d -> %d\n", v, k1, k2); }
-        //if (s1 != s2) {printf(" ====== %d change s %d -> %d\n", v, s1, s2); }
+       
     GRAPH_EDGE_END
 
     if (!V[u].IsLocked()) {
@@ -2079,21 +1882,7 @@ bool ParCM::CoreMaint::CheckLock(bool info) {
 
 vector<node_t> ParCM::CoreMaint::InitTestOM(size_t insert_size) {
      vector<int> nums(H.size(), 0);
-    // for(size_t k = 0; k < H.size(); k++){
-    //     for(node_t v = V[H[k]].next; v != T[k]; v = V[v].next) {
-    //         nums[k]++;
-    //     }
-    // }
-
-    // core_t test_k = -1;
-    // for(size_t k = 0; k < nums.size(); k++) {
-    //     if (nums[k] >= insert_size) test_k = k;
-    // }
-
-    // if(-1 == test_k) {
-    //     printf("cannot find a list has %d size!\n", insert_size);
-    //     return 1;
-    // }
+  
     const core_t test_k = 1;
 
     printf("k=%d insert %ld / %d nodes!\n", test_k, insert_size, nums[test_k]);
@@ -2116,89 +1905,19 @@ int ParCM::CoreMaint::TestOM(vector<node_t> &nodes) {
     const core_t test_k = 1;
     node_t h = H[test_k];
 
-    // test sequential OM
-#if 0
-    //int workerid = omp_get_thread_num();
-    for (int i = 0; i < nodes.size(); i++) {
-        OrderDelete(nodes[i]);
-    }
-
-    for(int i = 0; i < nodes.size(); i++) {
-        //printf("w %d insert %d after %d\n", workerid, nodes[i], h);
-        OrderInsert(h, nodes[i]);
-    }
-#else   
-#pragma omp parallel
-{
-    int workerid = omp_get_thread_num();
-    #pragma omp for
-    for (int i = 0; i < nodes.size(); i++) 
+  
+    #pragma omp parallel
     {
-        //OrderDelete(nodes[i]);
-        Order(nodes[1], nodes[2]);
-    }
+        int workerid = omp_get_thread_num();
+        #pragma omp for
+        for (int i = 0; i < nodes.size(); i++) 
+        {
+            //OrderDelete(nodes[i]);
+            Order(nodes[1], nodes[2]);
+        }
 
-    // #pragma omp for
-    // for(int i = 0; i < nodes.size(); i++) 
-    // {
-    //     //printf("w %d insert %d after %d\n", workerid, nodes[i], h);
-    //     OrderInsert(h, nodes[i]);
-    // }
-}
-//     #pragma omp parallel 
-//     {
-//         int workerid = omp_get_thread_num();
-//         #pragma omp for
-//         for (int i = 0; i < nodes.size(); i++) {
-//             OrderDelete(nodes[i]);
-//         }
-// #if 1
-//         #pragma omp for
-//         for(int i = 0; i < nodes.size(); i++) {
-//             printf("w %d insert %d after %d\n", workerid, nodes[i], upos);
-//             OrderInsert(upos, nodes[i]);
-//         }
-// #en
-
-// #if 0 // the vector cost much time
-//         #pragma omp for
-//         for(int i = 1; i < nodes.size(); i++) {
-//             if (i % 100 == 0) {
-//                 vector<node_t> y; y.reserve(16); 
-//                 for(int j = i - 90; j <= i; j++)
-//                     y.push_back(nodes[i]);
-//                 OrderInsertHeadBatch(test_k, y);
-//                 printf("batch insert %d\n", i);
-//             }
-//         }
-// #endif 
-        // #pragma omp for
-        // for(size_t i = 0; i < insert_size; i++) {
-        
-        // #if 0  // test insert to head
-        //         vector<node_t> y;
-        //         for (int i = 0; i < 17; i++) {
-        //             node_t v = V[t].pre;
-        //             OrderDelete(v);
-        //             y.push_back(v);
-        //         }
-        //         OrderInsertHeadBatch(test_k, y);
-        // #endif
-        //         node_t v = V[t].pre;
-        //         OrderDelete(v);
-        //         printf("delete %d\n", v);
-        //         //OrderInsertTail(test_k, v);
-        //         //OrderInsert(h, v);
-        //         // insert at head
-                
-            
-        //         // insert after tail
-        // }
     
-#endif    
-    // for(node_t u = V[h].next; u != t; u = V[u].next) {
-    //     nodes.push_back(u);
-    // }
+    }
     
     return 0;
 }
@@ -2301,35 +2020,14 @@ int ParCM::CoreMaint::CheckOM(bool info) {
 
         }
 
-        // for(node_t g = G[Hg[k]].next; g != Tg[k]; g = G[g].next) {
-        //     node_t next = G[g].next;
-        //     if (G[g].tag >= G[next].tag) {
-        //         if(info)  printf("k=%d, %d.tag: %llu, next %d.tag: %llu\n",
-        //             k, g, G[g].tag, next, G[next].tag);
-        //         else ASSERT(false);
-        //     }
-
-        // }
-
-        // if (V[H[k]].tag != 0) {
-        //     node_t next = V[H[k]].next;
-        //     if(g_debug)  printf("%d head.tag: %llu, next  %d.tag: %llu\n",
-        //         k, V[H[k]].
-        //         , next, V[next].tag);
-        //     else ASSERT(false);
-
-        // }
-        // if(V[T[k]].tag != MAX_TAG) {
-        //     ASSERT(false);
-        // }
-        
+     
     }
 
     return 0;
 }
 
 int ParCM::CoreMaint::CheckAllMCDValue(bool info) {
-    //printf("begin check mcd value: with n = %d\n", n);
+  
     for (node_t i = 0; i < n; i++){
 		if (EMPTY != atomic_read(&V[i].mcd)) {
 
@@ -2398,11 +2096,7 @@ int ParCM::CoreMaint::CheckDeg(bool info) {
                 u, V[u].degout, degout);
             else ASSERT(false);
         }
-        // if (mcd != V[u].mcd) { //check mcd
-        //     if(g_debug) printf("EDGE [%d (%d, %d)]:  %d.mcd = %d, should be %d\n",
-        //         id, x, y, u, V[u].mcd, mcd);
-        //     else ASSERT(false);
-        // }
+      
     }
     return 0;
 }
@@ -2422,141 +2116,3 @@ void ParCM::CoreMaint::PrintOMVersion() {
     }
     printf("\n");
 }
-
-
-
-
-#if 0
-/*x, y: inserted edge
-*id: the id of inserted edge
-* check each time to find bug*/
-int ParCM::CoreMaint::CheckAll(node_t x, node_t y, int id, vector<core_t> &tmp_core, vector<node_t> &order_v) {
-
-    if(g_debug) printf("*********** Our Check **************\n");
-
-        //check core number
-    if(g_debug) {
-        for(int i = 0; i < n; i++) {
-            if(tmp_core[i] != core[i]){
-                printf("wrong! *** %d: core is %d but %d after I/R %d edges \n", i, core[i], tmp_core[i], id);
-            }
-        }
-    } else ASSERT_INFO(tmp_core == core, "wrong result after insert");
-
-    if(0 == g_debug)    return 0; // only check the core number for release version. 
-
-    int error = 0;
-    //check reverse order list  
-    size_t total_ver_num = 0;
-    for(size_t k = 0; k < H.size(); k++){
-        vector<node_t> order, rorder;
-        for(node_t v = V[H[k]].next; v != T[k]; v = V[v].next) {
-            order.push_back(v);
-            total_ver_num++;
-        }
-
-        for(node_t v = V[T[k]].pre; v != H[k]; v = V[v].pre) {
-            rorder.push_back(v);
-        }
-        std::reverse(rorder.begin(), rorder.end());
-
-        ASSERT(order == rorder);
-    }
-    if (total_ver_num != n) {
-        if(g_debug) printf("wrong! *** total number in list: %ld but %ld", total_ver_num, n);
-        else ASSERT(false);
-
-    }
-
-
-    //check order list core number 
-    for(int k = 0; k < (int)H.size(); k++){
-        for(node_t v = V[H[k]].next; v != T[k]; v = V[v].next) {
-            if (k != core[v]) {
-
-            if(g_debug) printf("wrong! *** list check %d has core number %d but should be %d\n", v, k, core[v]);
-            else ASSERT(false);
-            
-            }
-        }
-    }
-
-
-    //check tag
-    // vector<int> order_v_index; int order = 0;
-    // for (const node_t v: order_v) { // order_v of order
-    //     order_v_index.push_back(order++);
-    // } 
-
-    for(size_t k = 0; k < H.size(); k++){
-        for(node_t v = V[H[k]].next; v != T[k]; v = V[v].next) {
-            node_t next = V[v].next;
-
-            // if (next != T[k] && order_v_index[v] >= order_v_index[next]) {
-            //     ASSERT(false);
-            // }
-
-            if (V[v].tag >= V[next].tag) {
-
-                if(g_debug)  printf("k=%d, %d.tag: %llu, next %d.tag: %llu\n",
-                    k, v, V[v].tag, next, V[next].tag);
-                else ASSERT(false);
-
-            }
-
-        }
-
-        if (V[H[k]].tag != 0) {
-            node_t next = V[H[k]].next;
-            if(g_debug)  printf("%d head.tag: %llu, next  %d.tag: %llu\n",
-                k, V[H[k]].
-                , next, V[next].tag);
-            else ASSERT(false);
-
-        }
-        if(V[T[k]].tag != MAX_TAG) {
-            ASSERT(false);
-        }
-        
-    }
-
-    //check degout degin core mcd
-    for (size_t u = 0; u < n; u++){
-        // degout <= core number
-        if (V[u].degout > core[u]) {
-            if(g_debug)  printf("degout [%d (%d, %d)]:  %d.degout = %d, core[%d]=%d\n",
-                id, x, y, u, V[u].degout, u, core[u]);
-            else ASSERT(false);
-        }
-
-        // check the degout and degin
-        if (0 != V[u].degin){
-            if(g_debug)  printf("degin [%d (%d, %d)]:  %d.degin = %d, should be %d\n",
-                id, x, y, u, V[u].degin, 0);
-            else ASSERT(false);
-        }
-        deg_t degout = 0, mcd = 0;
-
-        //for (const node_t v: graph[u]){
-        for (int idx = `[u]; idx < graph.end[u]; idx++){
-            node_t v = graph.node_idx[idx];
-
-            if (Order(u, v)) degout++;
-            if (core[u] <= core[v]) mcd++;
-        }
-        if (degout != V[u].degout) {
-            if(g_debug) printf("EDGE [%d (%d, %d)]:  %d.degout = %d, should be %d\n",
-                id, x, y, u, V[u].degout, degout);
-            else ASSERT(false);
-        }
-        if (mcd != V[u].mcd) { //check mcd
-            if(g_debug) printf("EDGE [%d (%d, %d)]:  %d.mcd = %d, should be %d\n",
-                id, x, y, u, V[u].mcd, mcd);
-            else ASSERT(false);
-        }
-    }
-
-    return error;
-
-}
-#endif 

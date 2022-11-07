@@ -1,6 +1,4 @@
-# ParCoreMaint
-
-This is the paralle vesion of order-based core maintenance. 
+This is the C++ code for the draft paper "Parallel Order-Based Core Maintenance in Dynamic Graphs". The experiments test two method, our parallel order based method  
 
 ## concurrent Order Maintenance
 * we must use the two level tag to inplement the O(1) time for insertion, removing, and order checking. 

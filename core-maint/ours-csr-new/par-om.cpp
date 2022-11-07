@@ -30,21 +30,12 @@ extern unsigned int g_lock_type; // CSR_LOCK by default.
 
 const int BUSYWAIT_I = 4; // the init value of exponential backoff. 
 
-#if 0 
-// it is very slow without GCC optimization. I guss i and j can be optimized in cache to reduce the bus traffic. 
-#pragma GCC push_options
-#pragma GCC optimize ("O0")
-void __attribute__((optimize("O0")))  power_busy_wait(int &i) { //__attribute__((optimize("O0")))
-        int j = i; while (j>0) --j;
-        i *= 2;
-}
-#pragma GCC pop_options
-#else 
+
 void power_busy_wait(int &i) { //__attribute__((optimize("O0")))
         int j = i; while (j>0) --j;
         i *= 2;
 }
-#endif
+
 
 /********************NODE****************************/
 ParOM::Node::Node(){
@@ -825,49 +816,6 @@ void ParOM::OM::TestInsert(vector<int> &pos, vector<int> &nodes, bool ispar) {
         }
     }
 }
-
-#if 0
-void ParOM::OM::TestInsertBatch(vector<int> &pos, vector<int> &nodes, bool ispar) {
-    const size_t size = pos.size();
-    if (ispar) {    
-    
-    #pragma omp parallel
-    {
-        int workerid = omp_get_thread_num();
-        vector<node_t> relabel_nodes;
-        vector<group_t> groups;
-        ParOM::Count cnt;
-        #pragma omp critical 
-        {
-            relabel_nodes.reserve(1024*2);
-            groups.reserve(1024*2);
-        }
-        //printf("insert workerid %d\n", workerid);
-        #pragma omp for OMP_PARALLEL_FOR
-        for (int i = 0; i < size; i++) 
-        {   
-            Insert(pos[i], nodes[i], relabel_nodes, groups, cnt);
-        }
-
-        #pragma omp critical 
-        {
-            g_cnt = g_cnt + cnt;
-        }
-    }
-
-    } else {
-        vector<node_t> relabel_nodes;
-        vector<group_t> groups;
-        relabel_nodes.reserve(1024*2);
-        groups.reserve(1024*2);
-        for (int i = 0; i < size; i++) 
-        {
-            Insert(pos[i], nodes[i], relabel_nodes, groups, g_cnt);
-        }
-    }
-}
-#endif 
-
 
 void ParOM::OM::TestDelete(vector<int> &pos, bool ispar) {
     const size_t size = pos.size();

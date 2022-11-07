@@ -267,18 +267,7 @@ namespace ParCM{
         PRIORITY_Q PQ;      // queue backward
         void PQ_update(const core_t k);   // update all nodes with new version.
 
-        /*
-        //used by edge remove, all allocated outside
-        QUEUE R; 
-
-        vector<node_t> Vblack;  // the order of black nodes (may include gray)
-        vector<node_t> Vcolor; // all colored vertices.
-
-        vector<node_t> relabel_nodes; //used by relabel
-        vector<group_t> groups;
-        vector<group_t> locked_groups;
-        */
-
+       
         omp_lock_t omlock_omp; 
         lock_t omlock_cas;
 

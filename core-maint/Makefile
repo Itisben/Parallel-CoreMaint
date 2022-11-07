@@ -16,12 +16,10 @@ H_FILES = $(addprefix $(INCDIR)/, $(INCFILES))
 
 OUTDIR=./
 
-all: core
-
 debug: CC+= -ggdb 
-debug2: CC+= -ggdb
+
 core: CC+= -O3
-core2: CC+= -O3
+
 
 core:  heap.o treap.o traversal.o glist.o ours.o ourspar.o om.o gadget.o main.o ./gm_graph/lib/libgmgraph.a
 	$(CC) $(CFLAGS2)  heap.o treap.o traversal.o glist.o ours.o om.o ourspar.o gadget.o main.o $(LFLAGS) -o core
@@ -29,11 +27,6 @@ core:  heap.o treap.o traversal.o glist.o ours.o ourspar.o om.o gadget.o main.o 
 debug:  heap.o treap.o traversal.o glist.o ours.o ourspar.o om.o gadget.o main.o ./gm_graph/lib/libgmgraph.a
 	$(CC) $(CFLAGS2)  heap.o treap.o traversal.o glist.o ours.o om.o ourspar.o gadget.o main.o $(LFLAGS) -o debug
 
-core2: main.o gadget.o heap.o treap.o traversal.o glist.o ours.o om.o ./gm_graph/lib/libgmgraph.a
-	$(CC) $(CFLAGS2) main.o gadget.o heap.o treap.o traversal.o glist.o ours.o om.o $(LFLAGS) -o core2
-
-debug2: main.o gadget.o heap.o treap.o traversal.o glist.o ours.o om.o ./gm_graph/lib/libgmgraph.a
-	$(CC) $(CFLAGS2) main.o gadget.o heap.o treap.o traversal.o glist.o ours.o  om.o $(LFLAGS) -o debug2
 
 
 main.o: main.cc
@@ -54,12 +47,6 @@ traversal.o: traversal/traversal.cc
 
 glist.o: glist/glist.cc
 	$(CC) $(CFLAGS) glist/glist.cc -o glist.o
-
-# ours-seq.o: ours-seq/core-maint.cpp
-# 	$(CC) $(CFLAGS) ours-seq/core-maint.cpp -o ours-seq.o
-
-#ours-seq-csr.o: ours-seq-csr/core-maint-csr.cpp
-#	$(CC) $(CFLAGS) ours-seq-csr/core-maint-csr.cpp -o ours-seq-csr.o
 
 ours.o: ours-csr-new/seq-csr-new.cpp
 	$(CC) $(CFLAGS) ours-csr-new/seq-csr-new.cpp -o ours.o
