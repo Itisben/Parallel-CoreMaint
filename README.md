@@ -44,7 +44,10 @@ This is the paralle vesion of order-based core maintenance. The experiments test
 * graph format (-T): 3 csr sample edges, 4 csr without sample edges, 5 csr with repeated random
 * worker number (-w): from 1 to the number of pysical cores, __0 means sequential running__.
 
-1. To execxute our 
+1. To execxute the compared edge-join method, in the directore ```~/FasterCoreMaintenance``, run:
+* run make to cimple
+* run ```~/FasterCoreMaintenance/kcore <graph-file> <edge-file> <workers>``
+* <edge-file> is the edges for insertion or removal. This file can be generated automatically when execute our method inserting or removing edges. 
 
 
 # Executing with Script
