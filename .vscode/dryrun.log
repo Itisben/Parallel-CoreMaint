@@ -1,4 +1,4 @@
-make --dry-run --keep-going --print-directory
+make --dry-run --always-make --keep-going --print-directory
 make: Entering directory '/home/guob15/github-code/Parallel-CoreMaint'
 make: Leaving directory '/home/guob15/github-code/Parallel-CoreMaint'
  
