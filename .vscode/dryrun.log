@@ -1,6 +1,0 @@
-make --dry-run --always-make --keep-going --print-directory
-make: Entering directory '/home/guob15/github-code/Parallel-CoreMaint'
-make: Leaving directory '/home/guob15/github-code/Parallel-CoreMaint'
- 
-make: *** No targets specified and no makefile found.  Stop.
-
