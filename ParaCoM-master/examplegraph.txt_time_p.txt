@@ -1,0 +1,3 @@
+examplegraph.txt	examplegraph_10.txt	0	0	3
+examplegraph.txt	examplegraph_10.txt	1	0.001	3
+examplegraph.txt	examplegraph_10.txt	1	0.001	3

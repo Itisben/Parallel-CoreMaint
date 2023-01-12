@@ -1313,6 +1313,7 @@ int ParCM::CoreMaint::EdgeInsert(node_t u, edge_t v, PRIORITY_Q &PQ, QUEUE &R,
         vector<node_t> &groups, int p) {
 
     thread_local int wait_i = BUSYWAIT_I;
+    Ecolor_cnt = 0;
 RELOCK:
   
 
@@ -1430,7 +1431,7 @@ RELOCK:
 
     /*count the size of locked vertices for each remove*/ 
     cnt[p].Vcount[Vcolor.size()]++;
-
+    cnt[p].Ecount[Ecolor_cnt]++;
     return 0;
 }
 
@@ -1520,6 +1521,7 @@ void ParCM::CoreMaint::Forward(node_t w, PRIORITY_Q &PQ, vector<node_t> &Vcolor,
     
     GRAPH_EDGE(w, w2)
         cnt_S++;
+        Ecolor_cnt++;
         if (SameCoreOrder(w, w2)) { // outgoing edges
 
             if ( !Qin[w2]) { // w2 is not in PQ
@@ -1652,6 +1654,7 @@ int ParCM::CoreMaint::EdgeRemove(node_t u, edge_t v, QUEUE &R,
             vector<node_t> &Vblack, vector<bool> &A, vector<node_t> &groups, int p) {
 
     R.clear(); Vblack.clear();
+    Ecolor_cnt = 0;
 
     /*lock in order avoid dead-lock
     * here may has dead lock. The case is that when lock v, but u is in propagation to v. 
@@ -1718,7 +1721,7 @@ REDO:
 			cnt_S++; // count all visited edges except calculate mcd.   
             /* make check and lock together to reduce the gap time.
             * w2 can be a busy checking the core number.*/
-            
+            Ecolor_cnt++;
             //ASSERT(a < A.size());
 
             if (0 == repeat_num) A[a] = false; // init A for the first time. 
@@ -1762,7 +1765,7 @@ REDO:
 
     /*count the size of locked vertices for each remove*/ 
     cnt[p].Vcount[Vblack.size()]++;
-
+    cnt[p].Ecount[Ecolor_cnt]++;
     return 0;
 }
 

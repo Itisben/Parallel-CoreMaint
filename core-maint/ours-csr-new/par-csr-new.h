@@ -172,9 +172,12 @@ namespace ParCM{
         size_t order_repeat; // Order operation repeat times. 
         size_t relabel; // relabel numbers
         vector<int> Vcount; 
+        vector<int> Ecount;
 
         Count(){tag = subtag = order_repeat = relabel = 0;
-                Vcount = vector<int>(10000, 0); }
+                Vcount = vector<int>(10000, 0); 
+                Ecount = vector<int>(10000, 0);
+        }
 
         void Clear(){tag = subtag = order_repeat = relabel = 0;}
         
@@ -187,6 +190,7 @@ namespace ParCM{
 
             for (int i = 0; i < Vcount.size(); i++) {
                 cnt.Vcount[i] = this->Vcount[i] + c.Vcount[i];
+                cnt.Ecount[i] = this->Ecount[i] + c.Ecount[i];
             }
             return cnt;
         }
@@ -220,6 +224,8 @@ namespace ParCM{
         vector<node_t> B; 
         vector<int> Btail;
         vector<int> Bhead;
+
+        int Ecolor_cnt = 0; 
 
         /*double linked list operations*/
         inline void ListDelete(node_t x);

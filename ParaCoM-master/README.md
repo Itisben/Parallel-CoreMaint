@@ -1,4 +1,5 @@
 # Parallel core maintenance (ParaCoM) 
+This is the source codd for the paper "Core Maintenance in Dynamic Graphs: A Parallel Approach Based on Matching" (IEEE Transactions on Paralell and Distributed Systems - 2018)
 
 The core number is a fundamental index reflecting the cohesiveness of a graph, which are widely used in large-scale graph analytics. The core maintenance problem requires to update the core numbers of vertices after a set of edges and vertices are inserted into or deleted from the graph. We investigate the parallelism in the core update process when multiple edges and vertices are inserted or deleted. Specifically, we discover a structure called superior edge set, the insertion or deletion of edges in which can be processed in parallel. 
 

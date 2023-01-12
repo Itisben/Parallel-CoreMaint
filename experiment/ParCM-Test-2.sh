@@ -3,13 +3,15 @@
 CORE="../core-maint/core"
 #compared parallel methods: fast core maintenance 
 KCORE="../FasterCoreMaintenance/kcore/kcore"
-#compared parallel methods: 
-MYKCORE=""
+#compared parallel methods: a parallel approach based on matching
+MYKCORE="../ParaCoM-master/mykcore"
+#compared sequential method: traversal 
+TRAVERSAL="../core-maint-source/core"
 
-TIMEOUT_TIME="600s" # 3 minutes timeout
+TIMEOUT_TIME="3600s" # 60 minutes timeout
 #WORKER_LIST="0 1 2 4 8 16 24 32 40 48 56 64 128"
-#WORKER_LIST="1 2 4 8 16 32 64"
-WORKER_LIST="1"
+WORKER_LIST="1 2 4 8 16 32 64"
+#WORKER_LIST="1"
 
 #sample a fixed number of edges
 #EDGE_SIZE="100000 200000 400000 800000 1600000 3200000 6400000 12800000 25600000 51200000 102400000"
@@ -35,7 +37,7 @@ GRAPHT=${2}
 #OUR_RESULT="${BENCHDIR}/results/results-10-9-2021-T3-hp.csv"
 #GRAPHT="3" #random csr
 
-OUR_RESULT="${BENCHDIR}/results/results-10-7-2022-stability.csv"
+OUR_RESULT="${BENCHDIR}/results/results-1-5-2023.csv"
 
 
 #result column
@@ -43,7 +45,7 @@ OUR_RESULT="${BENCHDIR}/results/results-10-7-2022-stability.csv"
 COLUMN="model,N,M,workers,alg,init-mstime,insert-num,remove-num,mstime,V*,V+,S,relabel,tag,subtag,assert,Insert,Delete,date"
 
 #repeat times
-REPEAT_TIME="100"
+REPEAT_TIME="10"
 
 trap "exit" INT #ensures that we can exit this bash program
 
@@ -80,29 +82,30 @@ test_real_offline() {
 
     for edge_size in `echo ${EDGE_SIZE}`
     do
-        # -T 3 is CSR file -T 4 is CSR file without sampling.
-        cmd="${TIMEOUT_TIME} ${CORE} -p ${OUR_TEST_GRAPH}/${name} -I ${edge_size} -m ${alg} -T ${GRAPHT} -w ${workers}"
-        echo ${cmd}
 
-        timeout ${cmd} &> ${TMPFILE}
-        cat ${TMPFILE}
+        # # -T 3 is CSR file -T 4 is CSR file without sampling.
+        # cmd="${TIMEOUT_TIME} ${CORE} -p ${OUR_TEST_GRAPH}/${name} -I ${edge_size} -m ${alg} -T ${GRAPHT} -w ${workers}"
+        # echo ${cmd}
 
-        python3 ParCM-parse-output.py "${base}" "${alg}" "${workers}" "${FAILFOLDER}" "${TMPFILE}" "${OUR_RESULT}" 
+        # timeout ${cmd} &> ${TMPFILE}
+        # cat ${TMPFILE}
 
-        echo ""
+        # python3 ParCM-parse-output.py "${base}" "${alg}" "${workers}" "${FAILFOLDER}" "${TMPFILE}" "${OUR_RESULT}" 
 
-        cmd="${TIMEOUT_TIME} ${CORE} -p ${OUR_TEST_GRAPH}/${name} -R ${edge_size} -m ${alg} -T ${GRAPHT} -w ${workers}"
-        echo ${cmd}
+        # echo ""
 
-        timeout ${cmd} &> ${TMPFILE}
-        cat ${TMPFILE}
+        # cmd="${TIMEOUT_TIME} ${CORE} -p ${OUR_TEST_GRAPH}/${name} -R ${edge_size} -m ${alg} -T ${GRAPHT} -w ${workers}"
+        # echo ${cmd}
 
-        python3 ParCM-parse-output.py "${base}" "${alg}" "${workers}" "${FAILFOLDER}" "${TMPFILE}" "${OUR_RESULT}" 
+        # timeout ${cmd} &> ${TMPFILE}
+        # cat ${TMPFILE}
+
+        # python3 ParCM-parse-output.py "${base}" "${alg}" "${workers}" "${FAILFOLDER}" "${TMPFILE}" "${OUR_RESULT}" 
 
 
-        echo ""
-        echo ""
-        echo ""
+        # echo ""
+        # echo ""
+        # echo ""
 
         # # generate the graph.
         # cmd="${TIMEOUT_TIME} ${CORE} -t 31 -p ${OUR_TEST_GRAPH}/${name} -T ${GRAPHT} -I ${edge_size}" 
@@ -121,6 +124,46 @@ test_real_offline() {
         # echo ""
         # echo ""
         # echo ""
+
+
+        #reset all CPU cores 
+        cmd="${TIMEOUT_TIME} ${MYKCORE} -r"
+        timeout ${cmd}
+
+
+                ############second compared methods
+        cmd="${TIMEOUT_TIME} ${MYKCORE} -p ${OUR_TEST_GRAPH}/${name}.edge ${OUR_TEST_GRAPH}/${name}.edge-${edge_size} ${workers}"
+        echo ${cmd}
+
+        timeout ${cmd} &> ${TMPFILE}
+        cat ${TMPFILE}
+
+
+        python3 ParCM-parse-output.py "${base}" "42" "${workers}" "${FAILFOLDER}" "${TMPFILE}" "${OUR_RESULT}" 
+
+        echo ""
+        echo ""
+        echo ""
+        echo ""
+
+        #############traversal method 
+        if [ "1" = "${workers}" ]; then
+
+            cmd="${TIMEOUT_TIME} ${TRAVERSAL} -p ${OUR_TEST_GRAPH}/${name}.edge -r ${edge_size} -m traversal -T 0"
+            echo ${cmd}
+
+            timeout ${cmd} &> ${TMPFILE}
+            cat ${TMPFILE}
+
+
+            python3 ParCM-parse-output.py "${base}" "43" "${workers}" "${FAILFOLDER}" "${TMPFILE}" "${OUR_RESULT}" 
+        fi 
+
+        echo ""
+        echo ""
+        echo ""
+        echo ""
+
     done 
 
     

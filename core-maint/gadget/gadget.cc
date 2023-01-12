@@ -7,6 +7,7 @@
 #include <string>
 #include "defs.h"
 #include "gm.h"
+#include <iostream>
 
 namespace gadget {
 void RepeatWith(const char symbol, const int repeat) {

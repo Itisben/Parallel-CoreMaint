@@ -1,0 +1,119 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        // debug OM
+        {
+            "name": "gdb launch 1",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/core-maint/debug2",
+            "MIMode": "gdb",
+            "miDebuggerPath": "/usr/bin/gdb",
+            // "args": ["-p", "~/test-graph/test/wikitalk.bin", 
+            //     "-I", "1000000",
+            // "-m", "4", "-T", "3", "-t", "21", "-w", "0", "-l", "1"], // test relabel
+            "args": ["-p", "~/test-graph/test/wikitalk.bin", 
+                "-I", "10000000",
+                "-t", "21", "-w", "32", "-l", "0", "-T", "2"], // test relabel
+                
+            // ./debug2 -p ~/test-graph/test/wikitalk.bin-I 100 -m 4 -T 3 -t 21 -w 16
+            "cwd": "${workspaceRoot}",
+            "setupCommands": [
+                {
+                  "description": "Enable pretty-printing for gdb",
+                  "text": "-enable-pretty-printing",
+                  "ignoreFailures": true
+                }
+              ],
+            //"coreDumpPath": "/tmp/core-debug2.440719.error405-MS-7C60.1655238100",
+
+        },
+        {
+            "name": "gdb launch 2",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/core-maint/debug",
+            "MIMode": "gdb",
+            "miDebuggerPath": "/usr/bin/gdb",
+            "args": ["-p", "~/test-graph/test-temporal/DBLP.tmp", 
+                "-I", "10000",
+                 "-m", "4", "-T", "6", "-d", "0", "-l", "0", "-w", "8", "-t", "0", "-b", "0"],
+
+            //  ./debug -p ~/test-graph/test/wikitalk.bin -I 1000000 -m 4 -T 5 -l 0 -w 32 -t 0
+            //   ./debug -p ~/test-graph/test/wikitalk.bin -R 100000 -m 4 -T 3 -l 0 -w 32 -t 1
+            //   ./core -p ~/test-graph/test/wikitalk.bin -R 100000 -m 4 -T 3 -l 0 -w 32 -t 1
+            // facebook.bin
+
+            //   ./debug -p ~/test-graph/test/facebook.bin -I 500 -m 4 -T 5 -l 1 -w 8 -t 1 
+            "cwd": "${workspaceRoot}",
+            "setupCommands": [
+                {
+                  "description": "Enable pretty-printing for gdb",
+                  "text": "-enable-pretty-printing",
+                  "ignoreFailures": true
+                }
+              ],
+            //./core -p ~/TestTrim/test/wiki-talk-en.bin -R 100000 -m 3 -T 3
+        },
+        {
+            "name": "gdb launch 3",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/core-maint/debug",
+            "MIMode": "gdb",
+            "miDebuggerPath": "/usr/bin/gdb",
+            "args": ["-p", "~/test-graph/test/wikitalk.bin", 
+                "-I", "500",
+                 "-m", "3", "-T", "5", "-d", "0", "-l", "1", "-w", "0", "-t", "0"],
+
+            //  ./debug -p ~/test-graph/test/wikitalk.bin -I 5000 -m 4 -T 5 -l 1 -w 0 -t 0
+            //   ./debug -p ~/test-graph/test/wikitalk.bin -R 100000 -m 4 -T 3 -l 0 -w 32 -t 1
+            //   ./core -p ~/test-graph/test/wikitalk.bin -R 100000 -m 4 -T 3 -l 0 -w 32 -t 1
+            // facebook.bin
+
+            //   ./debug -p ~/test-graph/test/facebook.bin -I 500 -m 4 -T 5 -l 1 -w 8 -t 1 
+            "cwd": "${workspaceRoot}",
+            "setupCommands": [
+                {
+                  "description": "Enable pretty-printing for gdb",
+                  "text": "-enable-pretty-printing",
+                  "ignoreFailures": true
+                }
+              ],
+            //./core -p ~/TestTrim/test/wiki-talk-en.bin -R 100000 -m 3 -T 3
+        },
+
+        {
+            "name": "gdb launch 4",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/core-maint/debug",
+            "MIMode": "gdb",
+            "miDebuggerPath": "/usr/bin/gdb",
+            "args": ["-p", "~/test-graph/test/patent.bin", 
+                 "-m", "4", "-c", "1", "-T" , "4"],
+
+            //  ./debug -p ~/test-graph/test/wikitalk.bin -I 5000 -m 4 -T 5 -l 1 -w 0 -t 0
+            //   ./debug -p ~/test-graph/test/wikitalk.bin -R 100000 -m 4 -T 3 -l 0 -w 32 -t 1
+            //   ./core -p ~/test-graph/test/wikitalk.bin -R 100000 -m 4 -T 3 -l 0 -w 32 -t 1
+            // facebook.bin
+
+            //   ./debug -p ~/test-graph/test/facebook.bin -I 500 -m 4 -T 5 -l 1 -w 8 -t 1 
+            "cwd": "${workspaceRoot}",
+            "setupCommands": [
+                {
+                  "description": "Enable pretty-printing for gdb",
+                  "text": "-enable-pretty-printing",
+                  "ignoreFailures": true
+                }
+              ],
+            //./core -p ~/TestTrim/test/wiki-talk-en.bin -R 100000 -m 3 -T 3
+        }
+
+
+
+    ]
+}

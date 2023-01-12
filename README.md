@@ -24,9 +24,9 @@ This is the source code for the parallel version of order-based core maintenance
    * **results**: this folder contains all the tested results. 
    * **convert**: this folder contains all the Python scripts that transfer the test results to the figures and table in the paper.
 
-3. ```~/FasterCoreMaintenance```: the Edge Join method. 
+3. ```~/FasterCoreMaintenance```: the Edge Join method in the paper "Faster Parallel Core Maintenance Algorithms in Dynamic Graphs" (IEEE Transactions on Paralell and Distributed Systems - 2020). 
 
-4. ```~/ParaCoM-master```: the other compared method.
+4. ```~/ParaCoM-master```: the other compared method in the paper "Core Maintenance in Dynamic Graphs: A Parallel Approach Based on Matching" (IEEE Transactions on Paralell and Distributed Systems - 2018).
 
 
 # Compiling and Executing

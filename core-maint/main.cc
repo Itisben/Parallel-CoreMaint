@@ -424,7 +424,7 @@ int main(int argc, char** argv) {
     } else if (method == 4) {
         ourparcm = new ParCM::CoreMaint(n, graph, parcore);
     } else {
-        printf("wrong method! %d\n", method);
+        printf("wrong method\n");
         exit(0);
     }
 
@@ -479,6 +479,19 @@ int main(int argc, char** argv) {
     
     printf("max core number: %d\n", max_core);
 
+
+    // compute the core number cmd:
+    // ./core -p /home/guob15/test-graph/test/wikitalk.bin -m 4 -I 100000 -T 5 -c 1
+    if (1 == outputCore) {
+        gadget::OutputCoreNumber(path, parcore, n);
+        printf("generate the core number file\n");
+        exit(0);
+    } else if (2 == outputCore) {
+        gadget::OutputSampleEdgeCoreNumber(path, parcore, edges, n);
+        printf("generate the core number file for sample edges \n");
+        exit(0);
+    }
+    
     if (optRemoveNum > 0) goto REMOVE;
 
 
@@ -684,7 +697,34 @@ END:
             fclose(file);
             printf("\n");
 
-          
+
+            std::string newpath2(path);
+            if (optRemoveNum > 0) {
+                newpath2 += ".R-Ecolor-";
+                newpath2 += std::to_string(optRemoveNum);
+            } else if (optInsertNum > 0) {
+                newpath2 += ".I-Ecolor-";
+                newpath2 += std::to_string(optInsertNum);
+            }
+
+            file = fopen(newpath2.c_str(), "w");
+
+            for(int i = 0; i < g_cnt.Ecount.size(); i++) {
+                if (g_cnt.Ecount[i] > 0) {
+                    //printf("Vcolor, %d, %d\n", i, g_cnt.Vcount[i]);
+
+                    std::string line;
+                    line += std::to_string(i);
+                    line += ",";
+                    line += std::to_string(g_cnt.Ecount[i]);
+                    line += "\n";
+                    fputs(line.c_str(), file);
+                }
+            }
+            
+            fclose(file);
+            printf("\n");
+
 
 
             ourparcm->ComputeCore(tmp_core, order_v, false);

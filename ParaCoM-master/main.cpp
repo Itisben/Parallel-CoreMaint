@@ -369,12 +369,25 @@ void  DeleteRemove(int k, int r)
 
 int main(int argc,char* argv[])
 {
-    if(argc != 4){
-		cout<<"Usage: -p(parallel)/-c(centralized) graph_filename edge_filename"<<endl;
+    char cmd[128] = "\0";
+
+    if (argc == 2){
+        /*reset the cpu cores*/
+        for (int i = 2; i < 127; i++) {
+            sprintf(cmd, "echo 1 > /sys/devices/system/cpu/cpu%d/online", i);
+            system(cmd);
+        }
+        return 0;
+    }
+
+    if(argc != 5){
+		cout<<"Usage: -p(parallel)/-c(centralized) graph_filename edge_filename cpu_core_num"<<endl;
 		return 0;
 	}
 	string fname=argv[2];
 	string edge_file = argv[3];
+    int cpu_core_num = atoi(argv[4]);
+
 	string graphfile = fname;// + ".txt";
 	string edgefile = edge_file; // + ".txt";
 	string delcorefile = fname + "_core_del.txt";
@@ -383,6 +396,19 @@ int main(int argc,char* argv[])
 	ifstream finedge(edgefile.data());
 	vector<pair<int,int> > allNewEdges;
 	vector<int> allcores;
+
+    /*set number of cpu cores for experiment, cpu 0 - 127, our machine has 128 cores (64 physical cores)
+    * this need to root*/
+    cout<<"set number of cpu cores to " << cpu_core_num <<endl; 
+
+    for (int i = 2; i < 127; i++) {
+        if(i > (cpu_core_num*2) -1 ) {
+            sprintf(cmd, "echo 0 > /sys/devices/system/cpu/cpu%d/online", i);
+            system(cmd);
+        }
+    }
+
+
 	//clock_t startall,endall,start,end;
 	struct timeval t_start,t_end,f_start,f_end; 
 	double dur;
@@ -411,6 +437,7 @@ int main(int argc,char* argv[])
 		newgraph.Map_index(allNewEdges);
 		newgraph.SetCores(allcores);
 	}
+
 	
 	//parallel algorithm
 	if(strcmp(argv[1],"-p") == 0)
@@ -455,7 +482,7 @@ int main(int argc,char* argv[])
 			
             //fout<<dur<<"\t"<<findTime<<"\t"<<round<<"\t";
             
-            cout<<"Delete "<<dur<<endl;
+            cout<<"Delete: "<<dur<<endl;
 			//write to new core file
 			//graph.WriteCores(delcorefile);
 			
@@ -503,9 +530,9 @@ int main(int argc,char* argv[])
 			long endall = ((long)t_end.tv_sec)*1000+(long)t_end.tv_usec/1000; 
 			dur = endall-startall;
 			findTime/=CLOCK_PER_MS;
-			fout<<dur<<"\t"<<findTime<<"\t"<<round<<"\n";
+			//fout<<dur<<"\t"<<findTime<<"\t"<<round<<"\n";
             
-            cout<<"Insert "<<dur<<endl;
+            cout<<"Insert: "<<dur<<endl;
 			
 			//write to new core file
 			//graph.WriteCores(inscorefile);								
@@ -522,7 +549,9 @@ int main(int argc,char* argv[])
 			graph.Deletion(allNewEdges);
 			end=clock();
 			double dur =(double)(end-start)/CLOCK_PER_MS;
-			fout<<dur<<"\t";
+			//fout<<dur<<"\t";
+
+            cout<<"Delete: "<< dur <<endl;
 			//write to core file
 			graph.WriteCores(delcorefile);	
 		}		
@@ -532,8 +561,10 @@ int main(int argc,char* argv[])
 			graph.Insertion(allNewEdges);
 			end=clock();
 			double dur =(double)(end-start)/CLOCK_PER_MS;					
-			fout<<dur<<"\n";
+			//fout<<dur<<"\n";
 			//write to new core file
+
+            cout<<"Insert: "<< dur <<endl;
 			graph.WriteCores(inscorefile);
 		}
 		fout.close();
@@ -544,6 +575,14 @@ int main(int argc,char* argv[])
 		finedge.close();
 		
 	}	
+
+
+    /*reset the cpu cores*/
+    for (int i = 2; i < 127; i++) {
+        sprintf(cmd, "echo 1 > /sys/devices/system/cpu/cpu%d/online", i);
+        system(cmd);
+    }
+
 	cout<<fname<<" finished!"<<endl;
 	return 0;
 }
