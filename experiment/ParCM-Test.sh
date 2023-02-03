@@ -43,7 +43,7 @@ OUR_RESULT="${BENCHDIR}/results/results-10-7-2022-stability.csv"
 COLUMN="model,N,M,workers,alg,init-mstime,insert-num,remove-num,mstime,V*,V+,S,relabel,tag,subtag,assert,Insert,Delete,date"
 
 #repeat times
-REPEAT_TIME="100"
+REPEAT_TIME="1"
 
 trap "exit" INT #ensures that we can exit this bash program
 
@@ -80,29 +80,39 @@ test_real_offline() {
 
     for edge_size in `echo ${EDGE_SIZE}`
     do
+
+        #generate the core files 
+        cmd="${TIMEOUT_TIME} ${CORE} -p ${OUR_TEST_GRAPH}/${name} -I ${edge_size} -m ${alg} -T ${GRAPHT} -w ${workers} -c 1"
+        echo ${cmd}
+
+        timeout ${cmd}
+
+
         # -T 3 is CSR file -T 4 is CSR file without sampling.
-        cmd="${TIMEOUT_TIME} ${CORE} -p ${OUR_TEST_GRAPH}/${name} -I ${edge_size} -m ${alg} -T ${GRAPHT} -w ${workers}"
-        echo ${cmd}
+        # cmd="${TIMEOUT_TIME} ${CORE} -p ${OUR_TEST_GRAPH}/${name} -I ${edge_size} -m ${alg} -T ${GRAPHT} -w ${workers}"
+        # echo ${cmd}
 
-        timeout ${cmd} &> ${TMPFILE}
-        cat ${TMPFILE}
+        # timeout ${cmd} &> ${TMPFILE}
+        # cat ${TMPFILE}
 
-        python3 ParCM-parse-output.py "${base}" "${alg}" "${workers}" "${FAILFOLDER}" "${TMPFILE}" "${OUR_RESULT}" 
+        # python3 ParCM-parse-output.py "${base}" "${alg}" "${workers}" "${FAILFOLDER}" "${TMPFILE}" "${OUR_RESULT}" 
 
-        echo ""
+        # echo ""
 
-        cmd="${TIMEOUT_TIME} ${CORE} -p ${OUR_TEST_GRAPH}/${name} -R ${edge_size} -m ${alg} -T ${GRAPHT} -w ${workers}"
-        echo ${cmd}
+        # cmd="${TIMEOUT_TIME} ${CORE} -p ${OUR_TEST_GRAPH}/${name} -R ${edge_size} -m ${alg} -T ${GRAPHT} -w ${workers}"
+        # echo ${cmd}
 
-        timeout ${cmd} &> ${TMPFILE}
-        cat ${TMPFILE}
+        # timeout ${cmd} &> ${TMPFILE}
+        # cat ${TMPFILE}
 
-        python3 ParCM-parse-output.py "${base}" "${alg}" "${workers}" "${FAILFOLDER}" "${TMPFILE}" "${OUR_RESULT}" 
+        # python3 ParCM-parse-output.py "${base}" "${alg}" "${workers}" "${FAILFOLDER}" "${TMPFILE}" "${OUR_RESULT}" 
 
 
-        echo ""
-        echo ""
-        echo ""
+        # echo ""
+        # echo ""
+        # echo ""
+
+
 
         # # generate the graph.
         # cmd="${TIMEOUT_TIME} ${CORE} -t 31 -p ${OUR_TEST_GRAPH}/${name} -T ${GRAPHT} -I ${edge_size}" 

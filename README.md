@@ -39,16 +39,23 @@ This is the source code for the parallel version of order-based core maintenance
 
 1. To execute our method, in the directory ```~/core-main```, run:
 
-   * For insert edges: ```./core -p <graph_path> -I <number_edges> -m <method> -T <graph_format> -w <number of workers>```
-   * For remove edges: ```./core -p <graph_path> -R <number_edges> -m <method> -T <graph_format> -w <number of workers>```
-   * method includes (-m): 4 our parallel method
-   * graph format (-T): 3 CSR sample edges, 4 CSR without sample edges, 5 CSR with repeated random
-   * worker number (-w): from 1 to the number of physical cores, __0 means sequential running__.
+    * For insert edges: ```./core -p <graph_path> -I <number_edges> -m <method> -T <graph_format> -w <number of workers>```
+    * For remove edges: ```./core -p <graph_path> -R <number_edges> -m <method> -T <graph_format> -w <number of workers>```
+    * method includes (-m): 4 our parallel method
+    * graph format (-T): 3 CSR sample edges, 4 CSR without sample edges, 5 CSR with repeated random
+    * worker number (-w): from 1 to the number of physical cores, __0 means sequential running__.
+    *example to insert 100000 edges: ```./core -p /home/guob15/test-graph/test/wikitalk.bin -m 4 -I 100000 -T 5 ```
+1. Generate the core number distribution files: ```./core -p /home/guob15/test-graph/test/wikitalk.bin -m 4 -I 100000 -T 5 -c 1```
 
-1. To execute the compared edge-join method, in the directory ```~/FasterCoreMaintenance``, run:
-* run make to cimple
-* run ```~/FasterCoreMaintenance/kcore <graph-file> <edge-file> <workers>``
-* <edge-file> is the edges for insertion or removal. This file can be automatically generated when executing our method of inserting or removing edges. 
+1. To execute the compared join-edge method, in the directory ```~/FasterCoreMaintenance```, run:
+    * run make to compile
+    * run ```./kcore <graph-file> <edge-file> <workers>``
+    * <edge-file> is the edges for insertion or removal. This file can be automatically generated when executing our method of inserting or removing edges. 
+
+1. To execute the compare matching-edge method, in the director ```~/ParaCoM-master```, run:
+    * run make to compile
+    * run ```./mykcore -p <graph-file> <edge-file> <workers>``
+    * <edge-file> is the edges for insertion or removal. This file can be automatically generated when executing our method of inserting or removing edges. 
 
 
 # Executing with Script
