@@ -23,6 +23,7 @@ This is the source code for the parallel version of order-based core maintenance
    * **ParCM-parse-output.py**: the python script called by benchmark.sh to parse the test result.
    * **results**: this folder contains all the tested results. 
    * **convert**: this folder contains all the Python scripts that transfer the test results to the figures and table in the paper.
+   * **graph-generate.py**: the python script to generate three synthetic graphs including ER, BA, and RMAT. 
 
 3. ```~/FasterCoreMaintenance```: the Edge Join method in the paper "Faster Parallel Core Maintenance Algorithms in Dynamic Graphs" (IEEE Transactions on Paralell and Distributed Systems - 2020). 
 
