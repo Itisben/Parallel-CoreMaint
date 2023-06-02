@@ -1,4 +1,7 @@
 #this is the graph generator by SNAP stanford. 
+#here is the link of documentation: 
+# http://snap.stanford.edu/snappy/doc/reference/GenPrefAttach.html
+
 import snap
 
 n = 1000000
